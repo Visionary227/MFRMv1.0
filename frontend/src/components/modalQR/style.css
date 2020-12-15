@@ -1,0 +1,76 @@
+.modalBlock{
+       width: 400px;
+       background: #FFFFFF;
+       box-shadow: 0px 0px 60px #00000033;
+       border-radius: 8px;
+       padding: 24px; 
+}
+.modalBlockTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.modalBlockTop p{
+    color: #323234;
+    text-transform: uppercase;
+    font-family: 'SegoeBold';
+    font-size: 24px;
+    width: 228px;
+    margin-bottom: 30px;
+}
+.modalBlockTop span{
+    color: #F5BC49;
+    text-transform: uppercase;
+    font-family: 'SegoeBold';
+}
+.qrImage{
+  width: 352px;
+  height: 352px;
+}
+
+@media (max-width:1750px){
+    .modalBlock{
+        width: 380px;
+        padding: 22px; 
+ }
+
+ .modalBlockTop p{
+     font-size: 22px;
+     width: 228px;
+     margin-bottom: 26px;
+ }
+
+ .qrImage{
+   width: 100%;
+   height: 352px;
+ }
+}
+@media (max-width:1200px){
+    .modalBlock{
+        width: 300px;
+        padding: 15px; 
+ }
+ .modalBlockTop p{
+     font-size: 18px;
+     width: 200px;
+     margin-bottom: 20px;
+ }
+ .qrImage{
+   height: 280px;
+ }
+}
+@media (max-width:767px){
+    .modalBlock{
+        width: 250px;
+        padding: 10px; 
+ }
+
+ .modalBlockTop p{
+     font-size: 16px;
+     width: 180px;
+     margin-bottom: 15px;
+ }
+ .qrImage{
+   height: 250px;
+ }
+}

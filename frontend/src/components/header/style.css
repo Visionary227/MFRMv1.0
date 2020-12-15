@@ -1,0 +1,511 @@
+.header{
+    width: 90%;
+    max-width: 1780px;
+    margin:  0 auto;
+    border-radius: 0px 0px 30px 30px;
+    box-shadow: 0px 0px 40px #00000029;
+    /* position: fixed; */
+    background: #fff;
+    /* left: 0;
+    right: 0; */
+    padding-bottom: 70px;
+    padding-top: 50px;
+}
+.headerSize{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo{
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.headerBtn{
+     color: #fff;
+     display: flex;
+     align-items: center;
+     background-color: #F5BC49;
+     justify-content: center;
+     cursor: pointer;
+    }
+.headerBtn p{
+    font-family: 'SegoeBold';
+    font-size: 14px;
+    }
+
+.logobtn{
+    width: 26px;
+    height: 26px;
+    margin-right: 14px;
+}
+.headerLeft{
+    display: flex;
+    align-items: center;
+}
+.headerLeftBlock{
+    display: flex;
+    align-items: center;
+    margin-right: 60px;
+}
+.headerIcons{
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+}
+.headerLeftInfo{
+    font-size: 18px;
+    color: #323234;
+    font-family: 'SegoeBold';
+}
+.active p{
+    color: #F5BC49;
+}
+.headerForHome{
+    width: 100%;
+    margin-top: 68px;
+}
+.headerForHomeBox{
+    display: flex;
+    justify-content: space-between;
+}
+.headerForHomeBoxBlock{
+    width: 400px;
+    margin-top: 70px;
+}
+.headerForHomeBoxBlock h2{
+font-size: 24px;
+color:#323234;
+font-family: 'SegoeBold';
+}
+.headerForHomeBoxBlock p{
+    font-size: 16px;
+    color:#A7A4AB;
+    width: 216px;
+    font-family: 'SegoeBold';
+}
+.headerLine{
+    width: 160px;
+    height: 2px;
+    background-color: #323234;
+    margin: 24px 0;
+}
+.headerBg{
+    width: 400px;
+    height: 450px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+.headerForHomePosition{
+    width: 980px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 300px;
+    position: relative;
+}
+.headerForHomePositionBlock{
+    width: 420px;
+    box-shadow: 0px 0px 60px #00000033;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+    position: absolute;
+}
+.headerForHomePositionBlock2{
+    right: 0;
+}
+.headerForHomePositionBlockTop{
+    width: 100%;
+    padding: 24px;
+}
+.headerForHomePositionBlockTopTitle{
+    font-size: 18px;
+    color:#F5BC49;
+    margin-bottom: 16px;
+    font-family: 'SegoeBold';
+}
+.headerPriceBox{
+    width: 200px;
+    height: 44px;
+    border: 1px solid #A7A4AB;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+
+}
+.headerPriceBoxInfo{
+    font-size: 16px;
+    color: #707070;
+}
+.headerForHomePositionBlockBottom{
+    width: 100%;
+    padding: 24px;
+    background-color: #323234;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+.headerLockBlock{
+    display: flex;
+    align-items: flex-end;
+}
+.headerLockBlock p{
+color: #fff;
+font-size: 20px;
+}
+.lockIcon{
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+}
+.toUnlockItPleaseAddYouWallet{
+    color: #A7A4AB;
+    margin: 12px 0 24px;
+    font-size: 16px;
+
+}
+.lockBlockBtnIcon{
+    width: 26px;
+    height: 26px;
+    margin-right: 14px;
+}
+.headerLockBlockBtn{
+    width: 240px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #F5BC49;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.headerLockBlockBtn p{
+   color: #F5BC49;
+   font-size: 14px;
+   font-family: 'SegoeBold';
+}
+
+@media (max-width: 1750px){
+    .header{
+        padding: 30px 30px 50px;
+    }
+    .logo{
+        width: 130px;
+        height: 80px;
+    }
+    .headerBtn p{
+        font-size: 14px;
+        }
+    
+    .logobtn{
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+    }
+    .headerLeftBlock{
+        margin-right: 40px;
+    }
+    .headerIcons{
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    .headerLeftInfo{
+        font-size: 17px;
+    }
+ 
+    .headerForHome{
+        margin-top: 40px;
+    }
+    .headerForHomeBoxBlock{
+        width: 400px;
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+    .headerForHomeBoxBlock h2{
+    font-size: 23px;
+    }
+    .headerForHomeBoxBlock p{
+        font-size: 15px;
+        width: 220px;
+    }
+    .headerLine{
+        width: 150px;
+        height: 1.5px;
+        margin: 22px 0;
+    }
+    .headerBg{
+        object-fit: cover;
+    }
+    .headerForHomePosition{
+        margin: 0 auto 280px;
+    }
+    .headerForHomePositionBlock{
+        width: 400px;
+    }
+    .headerForHomePositionBlockTop{
+        padding: 22px;
+    }
+    .headerForHomePositionBlockTopTitle{
+        font-size: 17px;
+        margin-bottom: 14px;
+    }
+    .headerPriceBox{
+        width: 180px;
+        height: 42px;
+    
+    }
+    .headerForHomePositionBlockBottom{
+        padding: 22px;
+    }
+    .headerLockBlock p{
+    font-size: 19px;
+    }
+    .lockIcon{
+        width: 38px;
+        height: 38px;
+        object-fit: cover;
+    }
+    .toUnlockItPleaseAddYouWallet{
+        margin: 10px 0 20px;
+        font-size: 16px;
+    
+    }
+    .lockBlockBtnIcon{
+        width: 24px;
+        height: 24px;
+    }
+    .headerLockBlockBtn{
+        width: 220px;
+        height: 42px;
+    }
+}
+@media (max-width: 1200px){
+    .header{
+        padding: 20px 20px 40px;
+    }
+    .logo{
+        width: 120px;
+        height: 50px;
+    }
+    .headerBtn p{
+        font-size: 13px;
+        }
+    
+    .logobtn{
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+    .headerLeftBlock{
+        margin-right: 20px;
+    }
+    .headerIcons{
+        width: 22px;
+        height: 22px;
+        margin-right: 6px;
+    }
+    .headerLeftInfo{
+        font-size: 15px;
+    }
+    .headerForHome{
+        margin-top: 0px;
+    }
+    .headerBg {
+        width: 320px;
+        height: 380px;
+        object-fit: contain;
+        top: 100px;
+    }
+
+
+    .headerForHomeBoxBlock{
+        width: 300px;
+        margin-top: 40px;
+        
+    }
+    .headerForHomeBoxBlock h2{
+      font-size: 20px;
+    }
+    .headerForHomeBoxBlock p{
+        font-size: 14px;
+        width: 300px;
+    }
+    .headerLine{
+        width: 100px;
+        height: 1px;
+        margin: 15px 0;
+    }
+    .headerForHomePosition{
+        margin: 0 auto 220px;
+        width: 650px;
+    }
+
+    .headerForHomePositionBlock{
+        width: 300px;
+    }
+    .headerForHomePositionBlockTop{
+        padding: 14px;
+    }
+    .headerForHomePositionBlockTopTitle{
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    .headerPriceBox{
+        width: 140px;
+        height: 40px;
+    
+    }
+    .headerForHomePositionBlockBottom{
+        padding: 14px;
+    }
+    .headerLockBlock p{
+    font-size: 16px;
+    }
+    .lockIcon{
+        width: 30px;
+        height: 30px;
+    }
+    .toUnlockItPleaseAddYouWallet{
+        margin: 6px 0 10px;
+        font-size: 14px;
+    
+    }
+    .lockBlockBtnIcon{
+        width: 20px;
+        height: 20px;
+    }
+    .headerLockBlockBtn{
+        width: 160px;
+        height: 40px;
+    }
+}
+@media (max-width: 767px){
+    .header{
+        padding: 10px 10px 20px;
+        width: 100%;
+    }
+    .headerSize {
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+
+    }
+    .logo{
+        width: 120px;
+        height: 50px;
+        top:0
+    }
+    .headerBtn p{
+        font-size: 12px;
+        }
+    
+    .logobtn{
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+    }
+    .headerLeft{
+        width: 100%;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+    .headerLeftBlock{
+        margin-right: 0px;
+    }
+    .headerIcons{
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+    }
+    .headerLeftInfo{
+        font-size: 14px;
+    }
+    .headerForHome{
+        margin-top: 0px;
+    }
+    .headerBg {
+        width: 320px;
+        height: 380px;
+        object-fit: contain;
+        top: 100px;
+        display: none;
+    }
+    .headerForHomeBoxBlock{
+        width: 100%;
+        margin-top: 30px;
+        
+    }
+    .headerForHomeBoxBlock h2{
+      font-size: 18px;
+      width: 300px;
+    }
+    .headerForHomeBoxBlock p{
+        font-size: 13px;
+        width: 300px;
+    }
+    .headerLine{
+        width: 80px;
+        height: 1px;
+        margin: 10px 0;
+    }
+    .headerForHomePosition{
+        margin: 0 auto 0;
+        width: 100%;
+        flex-direction: column;
+
+    }
+
+    .headerForHomePositionBlock{
+        width: 100%;
+       position: relative;
+       max-width: 300px;
+       margin-bottom: 20px;
+    }
+    .headerForHomePositionBlockTop{
+        padding: 10px;
+    }
+    .headerForHomePositionBlockTopTitle{
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    .headerPriceBox{
+        width: 140px;
+        height: 36px;
+    
+    }
+    .headerForHomePositionBlockBottom{
+        padding: 10px;
+    }
+    .headerLockBlock p{
+    font-size: 14px;
+    }
+    .lockIcon{
+        width: 20px;
+        height: 20px;
+    }
+    .toUnlockItPleaseAddYouWallet{
+        margin: 6px 0 6px;
+        font-size: 12px;
+    
+    }
+    .lockBlockBtnIcon{
+        width: 16px;
+        height: 16px;
+    }
+    .headerLockBlockBtn{
+        width: 160px;
+        height: 36px;
+        font-size: 12px;
+    }
+    .headerLockBlockBtn p {
+        font-size: 12px;
+    }
+}

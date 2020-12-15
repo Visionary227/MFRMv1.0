@@ -1,0 +1,97 @@
+/* .headerForHomeContainer{
+        width: 90%;
+        max-width: 1780px;
+        margin:  auto;
+        border-radius: 0px 0px 30px 30px;
+        box-shadow: 0px 0px 40px #00000029;
+        background: #fff;
+        margin-top: 390px;
+  
+}
+.headerForHome{
+    width: 100%;
+    margin-top: 68px;
+    position: relative;
+}
+.headerForHomeBox{
+    display: flex;
+    justify-content: space-between;
+}
+.headerForHomeBoxBlock{
+    width: 400px;
+}
+.headerForHomeBoxBlock h2{
+font-size: 24px;
+color:#323234;
+font-weight: bold;
+}
+.headerForHomeBoxBlock p{
+    font-size: 16px;
+    color:#A7A4AB;
+    width: 200px;
+}
+.headerLine{
+    width: 160px;
+    height: 2px;
+    background-color: #323234;
+    margin: 24px 0;
+}
+.headerBg{
+    width: 400px;
+    height: 450px;
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+.headerForHomePosition{
+    width: 980px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 100px;
+    position: relative;
+}
+.headerForHomePositionBlock{
+    width: 420px;
+    box-shadow: 0px 0px 60px #00000033;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+    position: absolute;
+}
+.headerForHomePositionBlock2{
+    right: 0;
+}
+.headerForHomePositionBlockTop{
+    width: 100%;
+    padding: 24px;
+}
+.headerForHomePositionBlockTopTitle{
+    font-size: 18px;
+    color:#F5BC49;
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+.headerPriceBox{
+    width: 200px;
+    height: 44px;
+    border: 1px solid #A7A4AB;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+
+}
+.headerPriceBoxInfo{
+    font-size: 16px;
+    color: #707070;
+}
+.headerForHomePositionBlockBottom{
+    width: 100%;
+    padding: 24px;
+    background-color: #323234;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+} */

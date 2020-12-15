@@ -1,0 +1,270 @@
+.harvectContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.harvectLogo{
+    width: 125px;
+    height: 145px;
+    margin-bottom: 16px;
+}
+.harvectTitle{
+    text-transform: uppercase; 
+    font-size: 20px;
+    font-family: 'SegoeBold';
+    color: #323234;
+}
+.harvectTitleSpan{
+    text-transform: uppercase; 
+    font-family: 'SegoeBold';
+    color: #F5BC49;
+}
+.harvectInfo{
+    width: 460px;
+    color: #707070;
+    font-size: 16px;
+    margin: 10px 0 60px;
+    text-align: center;
+}
+.harvectBlock{
+    display: flex;
+}
+.harvectBox{
+    display: flex;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 40px #00000029;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 194px;
+}
+.harvectBoxLeft{
+    padding: 20px;
+    background: #323234 0% 0% no-repeat padding-box;
+}
+.harvectBoxLeftLine{
+    border: 1px solid #FFFFFF;
+    width: 160px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.harvectBoxLeftLine p{
+    color: #FFFFFF;
+    text-transform: uppercase; 
+    font-family: 'SegoeBold';
+    font-size: 18px;
+}
+.harvectBoxRight{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+.harvectBoxRightCount{
+    color: #323234;
+    text-transform: uppercase;
+    font-family: 'SegoeBold';
+    font-size: 24px;
+}
+.harvectBoxRightInfo{
+    color: #707070;
+    font-size: 16px;
+    margin: 12px 0 0px;
+}
+.harvectBoxButton{
+    width: 240px;
+    height: 44px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 10px #0000001A;
+    border: 1px solid #F5BC49;
+    border-radius: 4px;
+    color: #F5BC49;
+    font-family: 'SegoeBold';
+    font-size: 14px;
+}
+.harvectBlockRight{
+    margin-left: 40px;
+}
+.harvectBoxButtonBox{
+    display: flex;
+    justify-content: space-between;
+}
+.harvectBoxButton1{
+    width: 176px;
+}
+.harvectBoxButton2{
+    width: 44px;
+    margin-left: 20px;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.cursor-blocked {
+    cursor: not-allowed;
+}
+@media (max-width:1750px){
+    .harvectLogo{
+        width: 120px;
+        height: 142px;
+        margin-bottom: 14px;
+    }
+    .harvectTitle{
+        font-size: 18px;
+    }
+    .harvectInfo{
+        width: 450px;
+        font-size: 15px;
+        margin: 8px 0 50px;
+    }
+    .harvectBox{
+        height: 180px;
+    }
+    .harvectBoxLeft{
+        padding: 18px;
+    }
+    .harvectBoxLeftLine{
+        width: 140px; 
+    }
+    .harvectBoxLeftLine p{
+        font-size: 16px;
+    }
+    .harvectBoxRight{
+        padding: 18px;
+    
+    }
+    .harvectBoxRightCount{
+        font-size: 20px;
+    }
+    .harvectBoxRightInfo{
+        font-size: 15px;
+        margin: 10px 0 0px;
+    }
+    .harvectBoxButton{
+        width: 220px;
+        height: 42px;
+        font-size: 13px;
+    }
+    .harvectBlockRight{
+        margin-left: 30px;
+    }
+    .harvectBoxButton1{
+        width: 160px;
+    }
+    .harvectBoxButton2{
+        width: 42px;
+        margin-left: 15px;
+    }
+}
+@media (max-width: 1200px){
+    .harvectLogo{
+        width: 100px;
+        height: 120px;
+        margin-bottom: 10px;
+    }
+    .harvectTitle{
+        font-size: 16px;
+    }
+    .harvectInfo{
+        width: 450px;
+        font-size: 13px;
+        margin: 6px 0 30px;
+    }
+    .harvectBox{
+        height: 140px;
+    }
+    .harvectBoxLeft{
+        padding: 12px;
+    }
+    .harvectBoxLeftLine{
+        width: 120px; 
+    }
+    .harvectBoxLeftLine p{
+        font-size: 14px;
+    }
+    .harvectBoxRight{
+        padding: 12px;
+    
+    }
+    .harvectBoxRightCount{
+        font-size: 18px;
+    }
+    .harvectBoxRightInfo{
+        font-size: 13px;
+        margin: 6px 0 0px;
+    }
+    .harvectBoxButton{
+        width: 180px;
+        height: 40px;
+        font-size: 13px;
+    }
+    .harvectBlockRight{
+        margin-left: 20px;
+    }
+    .harvectBoxButton1{
+        width: 140px;
+    }
+    .harvectBoxButton2{
+        width: 40px;
+        margin-left: 10px;
+    }
+}
+@media (max-width: 767px){
+    .harvectBlock{
+        flex-direction: column;
+    }
+    .harvectLogo{
+        display: none;
+    }
+    .harvectTitle{
+        font-size: 15px;
+    }
+    .harvectInfo{
+        width: 300px;
+        font-size: 12px;
+        margin: 6px 0 30px;
+    }
+    .harvectBox{
+        height: 100px;
+        margin-bottom: 20px;
+    }
+    .harvectBoxLeft{
+        padding: 10px;
+    }
+    .harvectBoxLeftLine{
+        width: 100px; 
+    }
+    .harvectBoxLeftLine p{
+        font-size: 12px;
+    }
+    .harvectBoxRight{
+        padding: 10px;
+    
+    }
+    .harvectBoxRightCount{
+        font-size: 16px;
+    }
+    .harvectBoxRightInfo{
+        font-size: 12px;
+        margin: 4px 0 0px;
+    }
+    .harvectBoxButton{
+        width: 150px;
+        height: 36px;
+        font-size: 12px;
+    }
+    .harvectBlockRight{
+        margin-left: 0px;
+    }
+    .harvectBoxButton1{
+        width: 100px;
+    }
+    .harvectBoxButton2{
+        width: 36px;
+        margin-left: 10px;
+    }
+}

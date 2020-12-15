@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'Segoe';
+  src: url('./assets/fonts/Segoe\ UI.ttf');
+}
+
+@font-face {
+  font-family: 'SegoeBold';
+  src: url('./assets/fonts/Segoe\ UI\ Bold.ttf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe';
+}
+
+input,
+textarea {
+  border: none;
+  outline: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  width: 240px;
+  height: 44px;
+  border-radius: 4px;
+  border: 1px solid #F5BC49;
+  background-color: transparent;
+  font-size: 14px;
+  transition: .5s;
+}
+
+.btn:hover {
+  border-radius: 14px;
+}
+
+.size {
+  max-width: 1520px;
+  margin: 0 auto;
+
+}
+
+@media (max-width:1200px) {
+  .btn {
+    width: 200px;
+    height: 40px;
+    font-size: 12px;
+  }
+}

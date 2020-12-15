@@ -1,0 +1,192 @@
+.stakeBox {
+    width: 480px;
+    height: 250px;
+    box-shadow: 0px 0px 40px #00000029;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    overflow: hidden;
+    margin: 20px 10px
+}
+
+.stakeBoxLeft {
+    background-color: #F5BC49;
+    padding: 20px;
+}
+
+.stakeBoxLeftBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 210px;
+    border: 1px solid #FFFFFF;
+}
+
+.stakeBoxLeftBlock p {
+    font-family: 'SegoeBold';
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.stakeBoxRight {
+    padding: 20px;
+}
+
+.stakeBoxRightTitle {
+    color: #000;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-family: 'SegoeBold';
+    height: 19px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.stakeBoxRightText {
+    color: #707070;
+    font-size: 16px;
+    height: 38px;
+    overflow: hidden;
+    width: 100%;
+    margin: 12px 0 24px;
+}
+
+.stakeBoxRightInput {
+    width: 240px;
+    height: 44px;
+    border: 1px solid #A7A4AB;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 13px;
+    color: #707070;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.stakeBoxRightButton {
+    width: 240px;
+    height: 44px;
+    border: 1px solid #F5BC49;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #F5BC49;
+    font-size: 14px;
+    box-shadow: 0px 0px 10px #0000001A;
+    cursor: pointer;
+
+}
+
+@media (max-width:1750px) {
+    .stakeBox {
+        width: 400px;
+        height: unset;
+        margin: 15px 8px
+    }
+
+    .stakeBoxLeft {
+        padding: 15px;
+    }
+
+    .stakeBoxLeftBlock {
+        width: 140px;
+        height: 100%;
+    }
+
+    .stakeBoxLeftBlock p {
+        font-size: 16px;
+    }
+
+    .stakeBoxRight {
+        padding: 15px;
+    }
+
+    .stakeBoxRightTitle {
+        font-size: 16px;
+        height: 17px;
+    }
+
+    .stakeBoxRightText {
+        font-size: 15px;
+        height: 36px;
+        margin: 10px 0 15px;
+    }
+
+    .stakeBoxRightInput {
+        width: 100%;
+        height: 40px;
+        padding: 0 10px;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .stakeBoxRightButton {
+        width: 100%;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width:925px) {
+    .stakeBox {
+        width: 300px;
+        margin: 10px 10px
+    }
+}
+
+@media (max-width:767px) {
+    .stakeBox {
+        margin: 5px 5px
+    }
+
+    .stakeBoxLeft {
+        padding: 8px;
+    }
+
+    .stakeBoxLeftBlock {
+        width: 120px;
+    }
+
+    .stakeBoxLeftBlock p {
+        font-size: 14px;
+    }
+
+    .stakeBoxRight {
+        padding: 8px;
+    }
+
+    .stakeBoxRightTitle {
+        font-size: 14px;
+        height: 15px;
+    }
+
+    .stakeBoxRightText {
+        font-size: 12px;
+        height: 29px;
+        margin: 8px 0 12px;
+    }
+
+    .stakeBoxRightInput {
+        height: 30px;
+        padding: 0 10px;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .stakeBoxRightButton {
+        height: 30px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width:674px) {
+    .stakeBox {
+        width: 100%;
+        margin: 8px 0px
+    }
+}

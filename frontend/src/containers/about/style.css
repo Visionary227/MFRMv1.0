@@ -1,0 +1,44 @@
+.aboutContaniner {
+    width: 958px;
+    margin: 10px auto 50px;
+}
+
+.aboutContaniner h3 {
+    color: #323234;
+    font-family: 'SegoeBold';
+    font-size: 20px;
+    margin: 40px 0 14px;
+    text-transform: uppercase;
+}
+
+.aboutContaniner h3 span {
+    color: #F5BC49;
+    font-family: 'SegoeBold';
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.aboutContaniner p {
+    color: #707070;
+    font-size: 16px;
+}
+
+@media(max-width:1000px) {
+    .aboutContaniner {
+        width: 90%;
+        margin: 0px auto 30px;
+    }
+
+    .aboutContaniner h3 {
+        font-size: 16px;
+        margin: 20px 0 10px;
+    }
+
+    .aboutContaniner h3 span {
+        font-size: 16px;
+    }
+
+    .aboutContaniner p {
+        font-size: 12px;
+    }
+}

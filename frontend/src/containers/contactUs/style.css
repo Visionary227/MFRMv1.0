@@ -1,0 +1,198 @@
+.contactUsContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.cotactUsBlock{
+    width: 740px;
+    padding: 60px;
+    background-color: #fff;
+    box-shadow: 0px 0px 40px #00000029;
+    border-radius: 8px;
+    margin: 60px 0;
+}
+.cotactUsBlock h3{
+    color: #323234;
+    font-family: 'SegoeBold';
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.cotactUsBlock h3 span{
+    color: #F5BC49;
+    font-family: 'SegoeBold';
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.cotactUsBlockText{
+    color: #707070;
+    font-size: 16px;
+    margin-top: 10px;
+}
+.cotactUsBlockFlex{
+    display: flex;
+    justify-content: space-between;
+}
+.cotactUsBlockFlexBox p{
+    color: #323234;
+    font-size: 16px;
+    margin: 20px 0 8px;
+    font-family: 'SegoeBold';
+}
+.cotactUsBlockFlexBox input{
+    color: #323234;
+    font-size: 16px;
+    width: 300px;
+    height: 44px;
+    border: 1px solid #A7A4AB;
+    border-radius: 4px;
+    padding: 0 12px;
+}
+.cotactUsBlockFlexBox textarea{
+    color: #323234;
+    font-size: 16px;
+    width: 100%;
+    height: 100px;
+    border: 1px solid #A7A4AB;
+    border-radius: 4px;
+    padding:  12px;
+}
+.cotactUsBlockFlexBoxBtnBox{
+    display: flex;
+    justify-content: flex-end;
+}
+.cotactUsBlockFlexBoxBtnBox button{
+    width: 300px;
+    height: 44px;
+    background: #F5BC49 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 10px #0000001A;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-family: 'SegoeBold';
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+@media (max-width:1750px){
+
+    .cotactUsBlock{
+        width: 700px;
+        padding: 40px;
+        margin: 40px 0;
+    }
+    .cotactUsBlock h3{
+        font-size: 19px;
+    }
+    .cotactUsBlock h3 span{
+        font-size: 19px;
+    }
+    .cotactUsBlockText{
+        font-size: 15px;
+        margin-top: 9px;
+    }
+    .cotactUsBlockFlexBox p{
+        font-size: 15px;
+        margin: 18px 0 8px;
+    }
+    .cotactUsBlockFlexBox input{
+        font-size: 15px;
+        width: 280px;
+        height: 42px;
+        padding: 0 10px;
+    }
+    .cotactUsBlockFlexBox textarea{
+        font-size: 15px;
+        height: 80px;
+        padding:  10px;
+    }
+    .cotactUsBlockFlexBoxBtnBox button{
+        width: 280px;
+        height: 42px;
+        font-size: 15px;
+        margin-top: 18px;
+    }
+}
+@media (max-width:1200px){
+
+    .cotactUsBlock{
+        width: 90%;
+        padding: 30px;
+        margin: 20px 0;
+    }
+    .cotactUsBlock h3{
+        font-size: 17px;
+    }
+    .cotactUsBlock h3 span{
+        font-size: 17px;
+    }
+    .cotactUsBlockText{
+        font-size: 14px;
+        margin-top: 6px;
+    }
+    .cotactUsBlockFlexBox p{
+        font-size: 15px;
+        margin: 12px 0 6px;
+    }
+    .cotactUsBlockFlexBox{
+        width: 45%;
+    }
+    .cotactUsBlockFlexBox input{
+        font-size: 14px;
+        width: 100%;
+        height: 40px;
+        padding: 0 10px;
+    }
+    .cotactUsBlockFlexBox textarea{
+        font-size: 14px;
+        height: 80px;
+        padding:  10px;
+    }
+    .cotactUsBlockFlexBoxBtnBox button{
+        width: 45%;
+        height: 42px;
+        font-size: 14px;
+        margin-top: 12px;
+    }
+}
+@media (max-width:767px){
+
+    .cotactUsBlock{
+        width: 95%;
+        padding: 10px;
+        margin: 20px 0;
+    }
+    .cotactUsBlock h3{
+        font-size: 16px;
+    }
+    .cotactUsBlock h3 span{
+        font-size: 16px;
+    }
+    .cotactUsBlockText{
+        font-size: 12px;
+        margin-top: 6px;
+    }
+    .cotactUsBlockFlex{
+        flex-direction: column;
+    }
+    .cotactUsBlockFlexBox{
+        width: 100%;
+    }
+    .cotactUsBlockFlexBox p{
+        font-size: 15px;
+    }
+    .cotactUsBlockFlexBox input{
+        font-size: 12px;
+        height: 36px;
+    }
+    .cotactUsBlockFlexBox textarea{
+        font-size: 12px;
+        height: 60px;
+        width: 100%;
+    }
+    .cotactUsBlockFlexBoxBtnBox button{
+        width: 45%;
+        height: 36px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+}
