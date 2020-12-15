@@ -1,0 +1,48 @@
+.stakeContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px 0;
+}
+
+.BtnWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.unlockBtn {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    background-color: #F5BC49;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.unlockBtn p {
+    font-family: 'SegoeBold';
+    font-size: 14px;
+}
+
+.unlockBtnWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width:1750px) {
+    .stakeContainer {
+        width: 90%;
+        margin: 0 auto;
+
+    }
+}
+
+@media (max-width:767px) {
+    .stakeContainer {
+        width: 95%;
+        padding: 20px 0;
+
+    }
+}
