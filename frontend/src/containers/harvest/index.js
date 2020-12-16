@@ -52,8 +52,8 @@ class Harvest extends Component {
   getPoolAmount (id) {
     utils.poolAmount(id).then(poolAmount => {
       this.setState({
-        poolAmount: poolAmount,
-        showPoolAmount: Number(poolAmount)
+        poolAmount: poolAmount[0],
+        showPoolAmount: ( poolAmount[0] / Math.pow(10,18) )
       })
       if (!Number(poolAmount)) {
         this.getLPToken(id)
@@ -65,7 +65,7 @@ class Harvest extends Component {
     utils.getLPTokenBalance(id).then(stakeBalance => {
       this.setState({
         stakeBalance: stakeBalance,
-        showLPTokenBalance: Number(stakeBalance) === 0 ? '0.000' : Number(stakeBalance)
+        showLPTokenBalance: Number(stakeBalance / Math.pow(10,18)) === 0 ? '0.000' : Number(stakeBalance / Math.pow(10,18))
       })
     })
   }
@@ -118,7 +118,7 @@ class Harvest extends Component {
     })
   }
   stakeHandler = () => {
-    let lpTokenValue = this.state.stakeBalance * Math.pow(10, 18);
+    let lpTokenValue = this.state.stakeBalance;
     utils.addToPool(this.state.pid, lpTokenValue).then(addToPool => {
       if (addToPool) {
         console.log('addToPool ', addToPool)
@@ -128,7 +128,7 @@ class Harvest extends Component {
     })
   }
   unStakeHandler = () => {
-    let poolAmountValue = this.state.poolAmount * Math.pow(10, 18);
+    let poolAmountValue = this.state.poolAmount;
     utils.removeToPool(this.state.pid, poolAmountValue).then(removeToPool => {
       if (removeToPool) {
         console.log('removeToPool ', removeToPool)

@@ -1,4 +1,5 @@
 const Web3 = require("web3");
+const BigNumber = require("bignumber.js");
 
 const mfrmTokenABI = [
     {
@@ -3867,14 +3868,14 @@ const strcABI = [
 ];
 const contractAddress =
     '{ "address":[' +
-    '{"mfrmToken":"0x18985b77C59cb8f2B368A7153DC247Dcb244a9dF"},' +
-    '{"mfrmMasterChef":"0x5EB94DF610B4B98D5b303305F5657A97F7A759db"}]}';
+    '{"mfrmToken":"0x916d83c3ae414f1c0550e30ff94e8204cace2efb"},' +
+    '{"mfrmMasterChef":"0x4d4183708f0faC88D22dd304e1197E5899556Fa7"}]}';
 export const contractAddressJSON = JSON.parse(contractAddress);
 
 const pairAddress =
     '{ "address":[' +
-    '{  "pid":"0", "pairAddress":"0xe99C59046099532d63A3fB64112a63588ff14b5E", "pair":"MFRM-ETH UNI-V2" },' +
-    '{  "pid":"1", "pairAddress":"0x3c83C648512d79993fDA11D920b7Dd8f9ef826fE", "pair":"APE-ETH UNI-V2" },' +
+    '{  "pid":"0", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"COOK-ETH UNI-V2" },' +
+    '{  "pid":"1", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"COOK-ETH UNI-V2" },' +
     '{  "pid":"2", "pairAddress":"0x29F82984F6081478112dc10347dCe433f386F769", "pair":"TEND-ETH UNI-V2" },' +
     '{  "pid":"3", "pairAddress":"0x1FE4a809cB6F2d495b875A07565Ccc466586a14b", "pair":"NYAN-ETH UNI-V2" },' +
     '{  "pid":"4", "pairAddress":"0xDdeB29d1E9D8690211a1ab4F229a57aFb1c8498D", "pair":"MEME-ETH UNI-V2" },' +
@@ -3999,7 +4000,7 @@ export async function getLPTokenBalance (pid) {
     );
     let balanceOfLPToken = contract.methods.balanceOf(ethaddress)
         .call().then((balanceOfLPToken) => {
-            return (balanceOfLPToken / Math.pow(10, 18)).toFixedSpecial(18);
+            return balanceOfLPToken;
         });
     return balanceOfLPToken;
 }
@@ -4019,7 +4020,7 @@ export function poolAmount (pid) {
     );
     let totalStackAmount = contract.methods.userInfo(pid, ethaddress)
         .call().then((totalStackAmount) => {
-            return (totalStackAmount.amount / Math.pow(10, 18)).toFixedSpecial(18);
+            return totalStackAmount;
         });
     return totalStackAmount;
 }
@@ -4046,7 +4047,7 @@ export async function getPairAllowance (pid) {
         ethaddress,
         contractAddressJSON.address[1].mfrmMasterChef)
         .call().then((totalAllowance) => {
-            return (totalAllowance / Math.pow(10, 18)).toFixedSpecial(18);
+           return (totalAllowance / Math.pow(10, 18)).toFixedSpecial(18);
         });
     return totalAllowance;
 }
@@ -4059,7 +4060,7 @@ export async function pendingMfrm (pid) {
     );
     let pendingMfrmToken = contract.methods.pendingMfrm(pid, ethaddress)
         .call().then((pendingMfrmToken) => {
-            return (pendingMfrmToken / Math.pow(10, 18)).toFixedSpecial(18);
+            return new BigNumber(pendingMfrmToken);
         });
     return pendingMfrmToken;
 }
@@ -4104,8 +4105,9 @@ export async function removeToPool (pid, amount) {
         mfrmMasterChefABI,
         contractAddressJSON.address[1].mfrmMasterChef
     );
+    let trueAmount = new BigNumber(amount);
     let removeToPoolData = contract.methods
-        .withdraw(pid, amount)
+        .withdraw(pid, trueAmount)
         .send({ from: ethaddress }, async function (error, transactionHash) {
             console.log(transactionHash);
             return transactionHash;
