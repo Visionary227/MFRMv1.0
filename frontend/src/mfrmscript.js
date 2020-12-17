@@ -1,5 +1,4 @@
 const Web3 = require("web3");
-const BigNumber = require("bignumber.js");
 
 const mfrmTokenABI = [
     {
@@ -3869,12 +3868,11 @@ const strcABI = [
 
 
 
-const COMPPAIR = "0x1a5AE641b20c14c46E21ca96eD3F776d73290a59";
 var totalPoolWeight = 11;
 var perblock = 50;
-    var annualblock = 365 * 86400 / 13.2; // approximation of 13 sec/block
-    var annualreward = annualblock * perblock;
-    console.log("Annual block",annualreward);
+var annualblock = 365 * 86400 / 13.2; // approximation of 13 sec/block
+var annualreward = annualblock * perblock;
+//console.log("Annual block",annualreward);
 
 const contractAddress =
     '{ "address":[' +
@@ -3885,7 +3883,7 @@ export const contractAddressJSON = JSON.parse(contractAddress);
 const pairAddress =
     '{ "address":[' +
     '{  "pid":"0", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"COOK-ETH UNI-V2" },' +
-    '{  "pid":"1", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"TOKEN-ETH UNI-V2" },' +
+    '{  "pid":"1", "pairAddress":"0x5f1c20c975a2978a799d66f8590d26acda703715", "pair":"T2-ETH UNI-V2" },' +
     '{  "pid":"2", "pairAddress":"0x29F82984F6081478112dc10347dCe433f386F769", "pair":"TEND-ETH UNI-V2" },' +
     '{  "pid":"3", "pairAddress":"0x1FE4a809cB6F2d495b875A07565Ccc466586a14b", "pair":"NYAN-ETH UNI-V2" },' +
     '{  "pid":"4", "pairAddress":"0xDdeB29d1E9D8690211a1ab4F229a57aFb1c8498D", "pair":"MEME-ETH UNI-V2" },' +
@@ -3914,7 +3912,7 @@ export const connectToWeb3 = async function connectWeb3 () {
         web3.eth.getAccounts().then("getAccounts" + console.log);
         //getAPYvalue();
         //getAPY(0);
-        getAPYs();
+        //getAPYs();
         return poolResData;
     }
 };
@@ -3959,11 +3957,13 @@ function initPoolHomedata () {
     });
 }
 
-function getAPY(pid){
+
+export async function getAPY(pid){
     const contract = new web3.eth.Contract(
         returnPair(pid),
         pairAddressJSON.address[pid].pairAddress
     );
+    var APY;
     contract.methods.getReserves().call(function(err, result1) {
         contract.methods.totalSupply().call(function(err, result2) {
             contract.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
@@ -3971,130 +3971,57 @@ function getAPY(pid){
                 var stakedSupply = result3; // staked amount in chef
                 var percentageOfSupplyInPool = stakedSupply / totalSupply;
                 //result1['_reserve0'] is the amount of tokens in the pool
-                var APY = ((((annualreward/4) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
+                APY = ((((annualreward/4) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
                 console.log("APY for pid number",pid,"is",APY);
-                return APY;
             });
         });
     });
+    return APY;
 }
 
-function getAPYs(){
+export async function getAPYs(){
     let contract = new web3.eth.Contract(
         mfrmMasterChefABI,
         contractAddressJSON.address[1].mfrmMasterChef
     );
+    var apys = [];
+    var APY;
     contract.methods.poolLength()
         .call().then((poolLength) => {
             //console.log(poolLength);
             for (let i = 0; i < poolLength; i++) {
-                getAPY(i);
+                const pool = new web3.eth.Contract(
+                    returnPair(i),
+                    pairAddressJSON.address[i].pairAddress
+                );
+                pool.methods.getReserves().call(function(err, result1) {
+                    pool.methods.totalSupply().call(function(err, result2) {
+                        pool.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
+                            var totalSupply = result2; // total supply of UNI-V2
+                            var stakedSupply = result3; // staked amount in chef
+                            var percentageOfSupplyInPool = stakedSupply / totalSupply;
+                            //result1['_reserve0'] is the amount of tokens in the pool
+                            APY = ((((annualreward/4) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
+                            console.log("APY for pid number",i,"is",APY);
+                            apys.push(APY.toFixed(2));
+                        });
+                    });
+                });
             }
+            //console.log("apys =",apys);
         }); 
+    return apys;
 }
 
-/*
-function getAPYvalue(){
-    var ctx0 = new web3.eth.Contract(uniswapABI, MFRMPAIR);
-    ctx0.methods.getReserves().call(function(err, result1) {
-        ctx0.methods.totalSupply().call(function(err, result2) {
-            ctx0.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
-                var totalSupply = result2; // total supply of UNI-V2
-                var stakedSupply = result3; // staked amount in chef
-                var percentageOfSupplyInPool = stakedSupply / totalSupply;
-                //result1['_reserve0'] is the amount of tokens in the pool
-                var MFRMAPY = ((((annualreward/4) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                console.log("APY for MFRM pair",MFRMAPY);
-            });
-        });
-    });
-    var ctx1 = new web3.eth.Contract(uniswapABI, APEPAIR);
-    ctx1.methods.getReserves().call(function(err, result1) {
-        ctx1.methods.totalSupply().call(function(err, result2) {
-            ctx1.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
-                var totalSupply = result2; // total supply of UNI-V2
-                var stakedSupply = result3; // staked amount in chef
-                var percentageOfSupplyInPool = stakedSupply / totalSupply;
-                var APEAPY = ((((annualreward/4) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                console.log("APY for APE pair",APEAPY);
-            });
-        });
-    });
-    var ctx2 = new web3.eth.Contract(uniswapABI, TENDPAIR);
-    ctx2.methods.getReserves().call(function(err, result1) {
-        ctx2.methods.totalSupply().call(function(err, result2) {
-            ctx2.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
-                var totalSupply = result2; // total supply of UNI-V2
-                var stakedSupply = result3; // staked amount in chef
-                var percentageOfSupplyInPool = stakedSupply / totalSupply;
-                var TENDAPY = ((((annualreward/12) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                console.log("APY for TEND pair",TENDAPY);
-               
-            });
-        });
-    });
-    var ctx3 = new web3.eth.Contract(uniswapABI, NYANPAIR);
-    ctx3.methods.getReserves().call(function(err, result1) {
-        ctx3.methods.totalSupply().call(function(err, result2) {
-            ctx3.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
-                var totalSupply = result2; // total supply of UNI-V2
-                var stakedSupply = result3; // staked amount in chef
-                var percentageOfSupplyInPool = stakedSupply / totalSupply;
-                var NYANAPY = ((((annualreward/12) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                console.log("APY for NYAN pair",NYANAPY);
-            });
-        });
-    });
-    var ctx4 = new web3.eth.Contract(uniswapABI, MEMEPAIR);
-    ctx4.methods.getReserves().call(function(err, result1) {
-        ctx4.methods.totalSupply().call(function(err, result2) {
-            ctx4.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
-                var totalSupply = result2; // total supply of UNI-V2
-                var stakedSupply = result3; // staked amount in chef
-                var percentageOfSupplyInPool = stakedSupply / totalSupply;
-                var MEMEAPY = ((((annualreward/12) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                console.log("APY for MEME pair",MEMEAPY);
-            });
-        });
-    });
-    var ctx5 = new web3.eth.Contract(uniswapABI, USDCPAIR);
-    ctx5.methods.getReserves().call(function(err, result1) {
-        ctx5.methods.totalSupply().call(function(err, result2) {
-            ctx5.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
-                var totalSupply = result2; // total supply of UNI-V2
-                var stakedSupply = result3; // staked amount in chef
-                var percentageOfSupplyInPool = stakedSupply / totalSupply;
-                var USDCAPY = ((((annualreward/15) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                console.log("APY for USDC pair",USDCAPY);
-            });
-        });
-    });
-    var ctx6 = new web3.eth.Contract(uniswapABI, xETHPAIR);
-    ctx6.methods.getReserves().call(function(err, result1) {
-        ctx6.methods.totalSupply().call(function(err, result2) {
-            ctx6.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
-                var totalSupply = result2; // total supply of UNI-V2
-                var stakedSupply = result3; // staked amount in chef
-                var percentageOfSupplyInPool = stakedSupply / totalSupply;
-                var xETHAPY = ((((annualreward/15) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                console.log("APY for xETH pair",xETHAPY);
-            });
-        });
-    });
-    var ctx7 = new web3.eth.Contract(uniswapABI, COMPPAIR);
-    ctx7.methods.getReserves().call(function(err, result1) {
-        ctx7.methods.totalSupply().call(function(err, result2) {
-            ctx7.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
-                var totalSupply = result2; // total supply of UNI-V2
-                var stakedSupply = result3; // staked amount in chef
-                var percentageOfSupplyInPool = stakedSupply / totalSupply;
-                var COMPAPY = ((((annualreward/15) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                console.log("APY for COMP pair",COMPAPY);
-            });
-        });
-    });
+
+export async function getPoolLength(){
+    let contract = new web3.eth.Contract(
+        mfrmMasterChefABI,
+        contractAddressJSON.address[1].mfrmMasterChef
+    );
+    const poolLength = contract.methods.poolLength().call();
+    return poolLength;
 }
-*/
 
 export default function loginViaMetamask () {
     if (typeof window.web3 == "undefined") {

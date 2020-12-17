@@ -54,7 +54,7 @@ class Harvest extends Component {
     utils.poolAmount(id).then(poolAmount => {
       this.setState({
         poolAmount: poolAmount[0],
-        showPoolAmount: ( poolAmount[0] / Math.pow(10,18) )
+        showPoolAmount: ( poolAmount[0] / Math.pow(10,18) ).toFixed(3)
       })
       if (!Number(poolAmount)) {
         this.getLPToken(id)

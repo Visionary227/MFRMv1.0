@@ -16,7 +16,7 @@ class Stake extends Component {
         showPopUp: false,
         showModal: false,
         addressData: [],
-        apys: [],
+        apys: "0",
     };
 
     select = (id) => {
@@ -33,14 +33,26 @@ class Stake extends Component {
     componentDidMount () {
         importScript("../../mfrmscript.js");
         this.getAddressData();
+        this.getAPYs();
     }
     componentWillUnmount () {
         removeScript("./../mfrmscript.js");
     }
     getAddressData = () => {
-        const addressInfo = utils.pairAddressJSON.address;
+        var addressInfo = utils.pairAddressJSON.address;
+        /*
+        for (let i = 0; i < addressInfo.length; i++) {
+            addressInfo[i].apy = utils.getAPY(i);
+        }
+        */
         this.setState({ ...this.state, addressData: addressInfo });
     };
+    getAPYs = () => {
+        const apys = utils.getAPYs().then(resp => {
+            this.setState({ apys: resp });
+            //this.setState({ apys: ["122%"] });
+        });
+    }
     openPopupHandler = () => {
         this.setState({ showPopUp: !this.state.showPopUp });
     };
@@ -74,8 +86,8 @@ class Stake extends Component {
                             key={item.pid}
                             select={() => this.select(item.pid)}
                             title={item.pair}
-                            apy="12%"
-                            //apy={item.apy}
+                            //apy={(item.apy)}
+                            apy={this.state.apys[item.pid]}
                         />
                     ))}
                 </div>

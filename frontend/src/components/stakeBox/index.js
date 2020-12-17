@@ -14,7 +14,7 @@ export default function StakeBox (props) {
                 <p className='stakeBoxRightText'>{props.title}</p>
                 <div className='stakeBoxRightInput'>
                     <p>APY</p>
-                    <p>{props.apy}</p>
+                    <p>{props.apy}<span>%</span></p>
                 </div>
                 <div className='stakeBoxRightButton' onClick={props.select}>
                     <p style={{ fontFamily: 'SegoeBold' }}>SELECT</p>

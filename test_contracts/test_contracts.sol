@@ -12,3 +12,14 @@
 
 //MFRMMasterChef
 //https://kovan.etherscan.io/address/0x4d4183708f0faC88D22dd304e1197E5899556Fa7
+
+
+
+//openzepERC20_fountain "TestTwo" / "T2"
+//https://kovan.etherscan.io/address/0x9e99d71d94d68479279b3784259538ce55d15cd7
+
+
+
+
+//Uniswap V2 pair ETH-T2
+//https://kovan.etherscan.io/address/0x5f1c20c975a2978a799d66f8590d26acda703715
