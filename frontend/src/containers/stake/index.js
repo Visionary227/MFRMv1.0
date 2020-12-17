@@ -16,6 +16,7 @@ class Stake extends Component {
         showPopUp: false,
         showModal: false,
         addressData: [],
+        apys: [],
     };
 
     select = (id) => {
@@ -73,6 +74,8 @@ class Stake extends Component {
                             key={item.pid}
                             select={() => this.select(item.pid)}
                             title={item.pair}
+                            apy="12%"
+                            //apy={item.apy}
                         />
                     ))}
                 </div>
