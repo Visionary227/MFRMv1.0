@@ -36,9 +36,10 @@ class Stake extends Component {
     componentWillUnmount () {
         removeScript("./../mfrmscript.js");
     }
+
     getAddressData = () => {
-        const addressInfo = utils.pairAddressJSON.address;
-        this.setState({ ...this.state, addressData: addressInfo });
+        let addressInfo = utils.getAddressInfo();
+        this.setState((state, props) => ({ addressData: addressInfo.address })); 
     };
     openPopupHandler = () => {
         this.setState({ showPopUp: !this.state.showPopUp });
@@ -49,30 +50,34 @@ class Stake extends Component {
     connectToWeb3Handler = () => {
         utils.connectToWeb3().then((res) => {
             if (res.length) {
-                let memeBalance, supplyBalance, harvestBalance, totalRewards;
-                [memeBalance, supplyBalance, harvestBalance, totalRewards] = [
-                    Number(res[0]).toFixed(3),
-                    res[1],
-                    Number(res[2]).toFixed(3),
-                    res[3],
+                let memeBalance, supplyBalance, harvestBalance, totalRewards, addressInfo;
+                [memeBalance, supplyBalance, harvestBalance, totalRewards, addressInfo] = [
+                    (res[0]/Math.pow(10,18)).toFixed(3),
+                    (res[1]/Math.pow(10,18)).toFixed(3),
+                    (res[2]/Math.pow(10,18)).toFixed(3),
+                    (res[3]/Math.pow(10,18)).toFixed(3),
+                    res[4],
                 ];
                 this.props.onStoreBoxInfo(true);
                 this.props.onStoreMemeBalance(memeBalance);
                 this.props.onStoreSupplyBalance(supplyBalance);
                 this.props.onStoreHarvestBalance(harvestBalance);
                 this.props.onStoreTotalRewards(totalRewards);
+                this.props.onStoreAddressInfo(addressInfo);
+                this.setState((state, props) => ({ addressData: addressInfo.address}));
             }
         });
     };
     render () {
-        let stakeBoxData = this.props.boxInfo ? (
+        let stakeBoxData = Boolean(this.props.boxInfo && this.props.addressData) ? (
             <div className="size">
                 <div className="stakeContainer">
-                    {this.state.addressData.map((item) => (
+                    {this.props.addressData.map((item) => (
                         <StakeBox
                             key={item.pid}
                             select={() => this.select(item.pid)}
                             title={item.pair}
+                            apy={item.apy}
                         />
                     ))}
                 </div>
@@ -112,9 +117,11 @@ class Stake extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log("mapStateToProps:", state.balanceInfo.addressData.address);
     return {
         boxInfo: state.balanceInfo.boxInfo,
         pendingMfrm: state.balanceInfo.pendingMfrm,
+        addressData: state.balanceInfo.addressData.address,
     };
 };
 
@@ -132,6 +139,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({ type: actionTypes.TOTAL_REWARDS, payload: data }),
         onStoreBoxInfo: (data) =>
             dispatch({ type: actionTypes.BOX_INFO, payload: data }),
+        onStoreAddressInfo: (data) =>
+            dispatch({ type: actionTypes.ADDRESSES, payload: data }),
     };
 };
 

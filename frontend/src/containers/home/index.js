@@ -14,6 +14,7 @@ class Home extends Component {
   state = {
     showPopUp: false,
     showModal: false,
+    addressData: [],
   };
   componentDidMount () {
     importScript("../../mfrmscript.js");
@@ -30,19 +31,24 @@ class Home extends Component {
   connectToWeb3Handler = () => {
     utils.connectToWeb3().then((res) => {
       if (res.length) {
-        let memeBalance, supplyBalance, harvestBalance, totalRewards;
-        [memeBalance, supplyBalance, harvestBalance, totalRewards] = [
-          Number(res[0]).toFixed(3),
-          Number(res[1]).toFixed(3),
-          Number(res[2]).toFixed(3),
-          res[3],
+        let memeBalance, supplyBalance, harvestBalance, totalRewards, addressInfo;
+        [memeBalance, supplyBalance, harvestBalance, totalRewards, addressInfo] = [
+            (res[0]/Math.pow(10,18)).toFixed(3),
+            (res[1]/Math.pow(10,18)).toFixed(3),
+            (res[2]/Math.pow(10,18)).toFixed(3),
+            (res[3]/Math.pow(10,18)).toFixed(3),
+            res[4],
         ];
+        console.log("addressInfo registered");
         this.props.onStoreBoxInfo(true);
         this.props.onStoreMemeBalance(memeBalance);
         this.props.onStoreSupplyBalance(supplyBalance);
         this.props.onStoreHarvestBalance(harvestBalance);
         this.props.onStoreTotalRewards(totalRewards);
-      }
+        this.props.onStoreAddressInfo(addressInfo);
+        this.setState((state, props) => ({ addressData: addressInfo.address}));
+        console.log("this.state.addressData= ", this.state.addressData)  
+    }
     });
   };
   render () {
@@ -98,6 +104,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: actionTypes.TOTAL_REWARDS, payload: data }),
     onStoreBoxInfo: (data) =>
       dispatch({ type: actionTypes.BOX_INFO, payload: data }),
+    onStoreAddressInfo: (data) =>
+      dispatch({ type: actionTypes.ADDRESSES, payload: data }),
   };
 };
 

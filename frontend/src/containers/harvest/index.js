@@ -38,6 +38,7 @@ class Harvest extends Component {
     this.getPairAllowance(id);
   }
   // checks user first time user coming or not
+  //checks if user has nonzero balance before moving to next step
   getPairAllowance (id) {
     utils.getPairAllowance(id).then(pairAllowance => {
       this.setState({ pairAllowance: Number(pairAllowance).toFixed(3) })
@@ -52,8 +53,8 @@ class Harvest extends Component {
   getPoolAmount (id) {
     utils.poolAmount(id).then(poolAmount => {
       this.setState({
-        poolAmount: poolAmount,
-        showPoolAmount: Number(poolAmount)
+        poolAmount: poolAmount[0],
+        showPoolAmount: ( poolAmount[0] / Math.pow(10,18) ).toFixed(3)
       })
       if (!Number(poolAmount)) {
         this.getLPToken(id)
@@ -65,7 +66,7 @@ class Harvest extends Component {
     utils.getLPTokenBalance(id).then(stakeBalance => {
       this.setState({
         stakeBalance: stakeBalance,
-        showLPTokenBalance: Number(stakeBalance) === 0 ? '0.000' : Number(stakeBalance)
+        showLPTokenBalance: Number(stakeBalance / Math.pow(10,18)) === 0 ? '0.000' : Number(stakeBalance / Math.pow(10,18))
       })
     })
   }
@@ -82,10 +83,10 @@ class Harvest extends Component {
     utils.connectToWeb3().then(res => {
       if (res.length) {
         this.props.onStoreBoxInfo(true);
-        this.props.onStoreMemeBalance(Number(res[0]).toFixed(3));
-        this.props.onStoreSupplyBalance(res[1]);
-        this.props.onStoreHarvestBalance(Number(res[2]).toFixed(3));
-        this.props.onStoreTotalRewards(res[3]);
+        this.props.onStoreMemeBalance((res[0]/Math.pow(10,18)));
+        this.props.onStoreSupplyBalance((res[1]/Math.pow(10,18)));
+        this.props.onStoreHarvestBalance((res[2]/Math.pow(10,18)));
+        this.props.onStoreTotalRewards((res[3]/Math.pow(10,18)));
       }
     })
   }
@@ -118,7 +119,7 @@ class Harvest extends Component {
     })
   }
   stakeHandler = () => {
-    let lpTokenValue = this.state.stakeBalance * Math.pow(10, 18);
+    let lpTokenValue = this.state.stakeBalance;
     utils.addToPool(this.state.pid, lpTokenValue).then(addToPool => {
       if (addToPool) {
         console.log('addToPool ', addToPool)
@@ -128,7 +129,7 @@ class Harvest extends Component {
     })
   }
   unStakeHandler = () => {
-    let poolAmountValue = this.state.poolAmount * Math.pow(10, 18);
+    let poolAmountValue = this.state.poolAmount;
     utils.removeToPool(this.state.pid, poolAmountValue).then(removeToPool => {
       if (removeToPool) {
         console.log('removeToPool ', removeToPool)
@@ -246,13 +247,13 @@ class Harvest extends Component {
 const mapStateToProps = (state) => {
   return {
     boxInfo: state.balanceInfo.boxInfo,
-    pendingMfrm: state.balanceInfo.pendingMfrm
+    pendingMfrm: (state.balanceInfo.pendingMfrm / Math.pow(10,18)).toFixed(3)
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    pendingMfrmBalance: (data) => dispatch({ type: actionTypes.PENDING_MFRM, payload: Number(data).toFixed(3) }),
+    pendingMfrmBalance: (data) => dispatch({ type: actionTypes.PENDING_MFRM, payload: data }),
     onStoreMemeBalance: (data) => dispatch({ type: actionTypes.MEME_BALANCE, payload: data }),
     onStoreSupplyBalance: (data) => dispatch({ type: actionTypes.SUPPLY_BALANCE, payload: data }),
     onStoreHarvestBalance: (data) => dispatch({ type: actionTypes.HARVEST_BALANCE, payload: data }),
