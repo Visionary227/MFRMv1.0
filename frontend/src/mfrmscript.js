@@ -3950,7 +3950,6 @@ function initPoolHomedata () {
     let addresses = JSON.parse(pairAddress);
     contract.methods.poolLength()
         .call().then((poolLength) => {
-            //console.log(poolLength);
             for (let i = 0; i < poolLength; i++) {
                 const pool = new web3.eth.Contract(
                     returnPair(i),

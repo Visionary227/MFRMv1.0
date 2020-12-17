@@ -70,13 +70,13 @@ export default function Header (props) {
                 <div className="headerForHomePositionBlock">
                   <div className="headerForHomePositionBlockTop">
                     <p className="headerForHomePositionBlockTopTitle">
-                      YOUR MEME{" "}
+                      YOUR MFRM{" "}
                       <span style={{ color: "#323234", fontFamily: "SegoeBold" }}>
                         BALANCE
                       </span>{" "}
                     </p>
                     <div className="headerPriceBox">
-                      <p className="headerPriceBoxInfo">${props.memeBalance}</p>
+                      <p className="headerPriceBoxInfo">{props.memeBalance}</p>
                     </div>
                   </div>
                   <div className="headerForHomePositionBlockBottom">
@@ -84,7 +84,7 @@ export default function Header (props) {
                       <>
                         <p style={{ color: "#A7A4AB" }}>Pending Harvest</p>
                         <p style={{ color: "#FFF" }}>
-                          {props.harvestBalance} MEME
+                          {props.harvestBalance} MFRM
                         </p>{" "}
                       </>
                     ) : (
@@ -119,16 +119,16 @@ export default function Header (props) {
                 <div className="headerForHomePositionBlock headerForHomePositionBlock2">
                   <div className="headerForHomePositionBlockTop">
                     <p className="headerForHomePositionBlockTopTitle">
-                      YOUR SUPPLY{" "}
+                      TOTAL MFRM{" "}
                       <span
                         style={{ color: "#323234", fontFamily: "SegoeBold" }}
                       >
-                        BALANCE
+                        SUPPLY
                       </span>{" "}
                     </p>
                     <div className="headerPriceBox">
                       <p className="headerPriceBoxInfo">
-                        ${props.supplyBalance}
+                        {props.supplyBalance}
                       </p>
                     </div>
                   </div>
@@ -139,7 +139,7 @@ export default function Header (props) {
                           New rewards per block
                         </p>
                         <p style={{ color: "#FFF" }}>
-                          {props.totalRewards} MEME
+                          {props.totalRewards} MFRM
                         </p>
                       </>
                     ) : (
