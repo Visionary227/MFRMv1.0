@@ -3868,11 +3868,10 @@ const strcABI = [
 
 
 
-var totalPoolWeight = 11;
-var perblock = 50;
-var annualblock = 365 * 86400 / 13.2; // approximation of 13 sec/block
-var annualreward = annualblock * perblock;
-//console.log("Annual block",annualreward);
+//const totalPoolWeight = 11;
+const perblock = 50;
+const annualblock = 365 * 86400 / 13.2; // approximation of 13 sec/block
+const annualreward = annualblock * perblock;
 
 const contractAddress =
     '{ "address":[' +
@@ -3882,17 +3881,17 @@ export const contractAddressJSON = JSON.parse(contractAddress);
 
 const pairAddress =
     '{ "address":[' +
-    '{  "pid":"0", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"COOK-ETH UNI-V2" },' +
-    '{  "pid":"1", "pairAddress":"0x5f1c20c975a2978a799d66f8590d26acda703715", "pair":"T2-ETH UNI-V2" },' +
-    '{  "pid":"2", "pairAddress":"0x29F82984F6081478112dc10347dCe433f386F769", "pair":"TEND-ETH UNI-V2" },' +
-    '{  "pid":"3", "pairAddress":"0x1FE4a809cB6F2d495b875A07565Ccc466586a14b", "pair":"NYAN-ETH UNI-V2" },' +
-    '{  "pid":"4", "pairAddress":"0xDdeB29d1E9D8690211a1ab4F229a57aFb1c8498D", "pair":"MEME-ETH UNI-V2" },' +
-    '{  "pid":"5", "pairAddress":"0x6d2ED3Ec5FA9be8F88B67731185c9C895163c338", "pair":"USDC-ETH UNI-V2" },' +
-    '{  "pid":"6", "pairAddress":"0xC6eafB745C22dbe5309d4B74bD8c893A4cdd7864", "pair":"xETH-eth UNI-V2" },' +
-    '{  "pid":"7", "pairAddress":"0x1a5AE641b20c14c46E21ca96eD3F776d73290a59", "pair":"COMP-ETH UNI-V2" },' +
-    '{  "pid":"8", "pairAddress":"0x3dEb61771C360f866993B403D51f740a5bB38BC3", "pair":"MSP" },' +
-    '{  "pid":"9", "pairAddress":"0xe1f7B84AeE86C593C0ca5A47Fa2f539E2Bd11cDE", "pair":"GAM" },' +
-    '{  "pid":"10","pairAddress":"0x799e64bcC25B7a0575E9000F9459Cd0b052DA193", "pair":"STRC" }]}';
+    '{  "pid":"0", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"COOK-ETH UNI-V2", "apy": "127" },' +
+    '{  "pid":"1", "pairAddress":"0x5f1c20c975a2978a799d66f8590d26acda703715", "pair":"T2-ETH UNI-V2", "apy": "127" },' +
+    '{  "pid":"2", "pairAddress":"0x29F82984F6081478112dc10347dCe433f386F769", "pair":"TEND-ETH UNI-V2", "apy": "127" },' +
+    '{  "pid":"3", "pairAddress":"0x1FE4a809cB6F2d495b875A07565Ccc466586a14b", "pair":"NYAN-ETH UNI-V2", "apy": "127" },' +
+    '{  "pid":"4", "pairAddress":"0xDdeB29d1E9D8690211a1ab4F229a57aFb1c8498D", "pair":"MEME-ETH UNI-V2", "apy": "127" },' +
+    '{  "pid":"5", "pairAddress":"0x6d2ED3Ec5FA9be8F88B67731185c9C895163c338", "pair":"USDC-ETH UNI-V2", "apy": "127" },' +
+    '{  "pid":"6", "pairAddress":"0xC6eafB745C22dbe5309d4B74bD8c893A4cdd7864", "pair":"xETH-eth UNI-V2", "apy": "127" },' +
+    '{  "pid":"7", "pairAddress":"0x1a5AE641b20c14c46E21ca96eD3F776d73290a59", "pair":"COMP-ETH UNI-V2", "apy": "127" },' +
+    '{  "pid":"8", "pairAddress":"0x3dEb61771C360f866993B403D51f740a5bB38BC3", "pair":"MSP", "apy": "127" },' +
+    '{  "pid":"9", "pairAddress":"0xe1f7B84AeE86C593C0ca5A47Fa2f539E2Bd11cDE", "pair":"GAM", "apy": "127" },' +
+    '{  "pid":"10","pairAddress":"0x799e64bcC25B7a0575E9000F9459Cd0b052DA193", "pair":"STRC", "apy": "127" }]}';
 export const pairAddressJSON = JSON.parse(pairAddress);
 const approveLimit = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
 var ethaddress = "0x";
@@ -3910,9 +3909,6 @@ export const connectToWeb3 = async function connectWeb3 () {
         }
         const poolResData = initPoolHomedata();
         web3.eth.getAccounts().then("getAccounts" + console.log);
-        //getAPYvalue();
-        //getAPY(0);
-        //getAPYs();
         return poolResData;
     }
 };
@@ -3951,41 +3947,7 @@ function initPoolHomedata () {
         .call().then((mfrmPerBlock) => {
             return mfrmPerBlock;
         });
-    const promiseData = [accountBalance, totalSupply, pendingToken, mfrmPerBlock];
-    return Promise.all(promiseData).then((resultantCount) => {
-        return resultantCount;
-    });
-}
-
-
-export async function getAPY(pid){
-    const contract = new web3.eth.Contract(
-        returnPair(pid),
-        pairAddressJSON.address[pid].pairAddress
-    );
-    var APY;
-    contract.methods.getReserves().call(function(err, result1) {
-        contract.methods.totalSupply().call(function(err, result2) {
-            contract.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
-                var totalSupply = result2; // total supply of UNI-V2
-                var stakedSupply = result3; // staked amount in chef
-                var percentageOfSupplyInPool = stakedSupply / totalSupply;
-                //result1['_reserve0'] is the amount of tokens in the pool
-                APY = ((((annualreward/4) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                console.log("APY for pid number",pid,"is",APY);
-            });
-        });
-    });
-    return APY;
-}
-
-export async function getAPYs(){
-    let contract = new web3.eth.Contract(
-        mfrmMasterChefABI,
-        contractAddressJSON.address[1].mfrmMasterChef
-    );
-    var apys = [];
-    var APY;
+    let addresses = JSON.parse(pairAddress);
     contract.methods.poolLength()
         .call().then((poolLength) => {
             //console.log(poolLength);
@@ -4001,26 +3963,51 @@ export async function getAPYs(){
                             var stakedSupply = result3; // staked amount in chef
                             var percentageOfSupplyInPool = stakedSupply / totalSupply;
                             //result1['_reserve0'] is the amount of tokens in the pool
-                            APY = ((((annualreward/4) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool);
-                            console.log("APY for pid number",i,"is",APY);
-                            apys.push(APY.toFixed(2));
+                            const APY = ((((annualreward/4) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool).toFixed(2);
+                            console.log("initPoolHomedata: APY for pid number",i,"is",APY);
+                            addresses.address[i].apy = APY;
                         });
                     });
                 });
             }
-            //console.log("apys =",apys);
-        }); 
-    return apys;
+            //console.log("addresses =",addresses);
+            return addresses;
+        });
+    const promiseData = [accountBalance, totalSupply, pendingToken, mfrmPerBlock, addresses];
+    return Promise.all(promiseData).then((resultantCount) => {
+        return resultantCount;
+    });
 }
 
-
-export async function getPoolLength(){
+export async function getAddressInfo(){
     let contract = new web3.eth.Contract(
         mfrmMasterChefABI,
         contractAddressJSON.address[1].mfrmMasterChef
     );
-    const poolLength = contract.methods.poolLength().call();
-    return poolLength;
+    let addresses = JSON.parse(pairAddress);
+    contract.methods.poolLength()
+        .call().then((poolLength) => {
+            //console.log(poolLength);
+            for (let i = 0; i < poolLength; i++) {
+                const pool = new web3.eth.Contract(
+                    returnPair(i),
+                    pairAddressJSON.address[i].pairAddress
+                );
+                pool.methods.getReserves().call(function(err, result1) {
+                    pool.methods.totalSupply().call(function(err, result2) {
+                        pool.methods.balanceOf(contractAddressJSON.address[1].mfrmMasterChef).call(function(err, result3) {
+                            var totalSupply = result2; // total supply of UNI-V2
+                            var stakedSupply = result3; // staked amount in chef
+                            var percentageOfSupplyInPool = stakedSupply / totalSupply;
+                            //result1['_reserve0'] is the amount of tokens in the pool
+                            const APY = ((((annualreward/4) / (result1['_reserve0'] * 2 / Math.pow(10, 18))) * 100 * 1) / percentageOfSupplyInPool).toFixed(2);
+                            addresses.address[i].apy = APY;
+                        });
+                    });
+                });
+            }
+        return addresses;
+        });
 }
 
 export default function loginViaMetamask () {

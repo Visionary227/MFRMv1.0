@@ -7,6 +7,7 @@ const initialState = {
   totalRewards: 0,
   boxInfo: false,
   pendingMfrm: "0.000",
+  addressData: false,
 };
 
 const balanceReducer = (state = initialState, action) => {
@@ -23,6 +24,8 @@ const balanceReducer = (state = initialState, action) => {
       return { ...state, boxInfo: action.payload };
     case actionTypes.PENDING_MFRM:
       return { ...state, pendingMfrm: action.payload };
+    case actionTypes.ADDRESSES:
+      return { ...state, addressData: action.payload };
     default:
       return state;
   }

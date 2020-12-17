@@ -5,3 +5,4 @@ export const HARVEST_BALANCE = 'HARVEST_BALANCE';
 export const TOTAL_REWARDS = 'TOTAL_REWARDS';
 export const BOX_INFO = 'BOX_INFO';
 export const PENDING_MFRM = 'PENDING_MFRM';
+export const ADDRESSES = 'ADDRESSES';
