@@ -32,10 +32,10 @@ class Home extends Component {
       if (res.length) {
         let memeBalance, supplyBalance, harvestBalance, totalRewards;
         [memeBalance, supplyBalance, harvestBalance, totalRewards] = [
-          Number(res[0]).toFixed(3),
-          Number(res[1]).toFixed(3),
-          Number(res[2]).toFixed(3),
-          res[3],
+          (res[0]/Math.pow(10,18)).toFixed(3),
+          (res[1]/Math.pow(10,18)).toFixed(3),
+          (res[2]/Math.pow(10,18)).toFixed(0),
+          (res[3]/Math.pow(10,18)).toFixed(0),
         ];
         this.props.onStoreBoxInfo(true);
         this.props.onStoreMemeBalance(memeBalance);

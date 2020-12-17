@@ -3875,7 +3875,7 @@ export const contractAddressJSON = JSON.parse(contractAddress);
 const pairAddress =
     '{ "address":[' +
     '{  "pid":"0", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"COOK-ETH UNI-V2" },' +
-    '{  "pid":"1", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"COOK-ETH UNI-V2" },' +
+    '{  "pid":"0", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"TOKEN-ETH UNI-V2" },' +
     '{  "pid":"2", "pairAddress":"0x29F82984F6081478112dc10347dCe433f386F769", "pair":"TEND-ETH UNI-V2" },' +
     '{  "pid":"3", "pairAddress":"0x1FE4a809cB6F2d495b875A07565Ccc466586a14b", "pair":"NYAN-ETH UNI-V2" },' +
     '{  "pid":"4", "pairAddress":"0xDdeB29d1E9D8690211a1ab4F229a57aFb1c8498D", "pair":"MEME-ETH UNI-V2" },' +
@@ -3912,7 +3912,7 @@ function initPoolHomedata () {
     );
     let accountBalance = contract.methods.balanceOf(ethaddress)
         .call().then((accountBalance) => {
-            return (accountBalance / Math.pow(10, 18)).toFixedSpecial(18);
+            return (accountBalance);
         });
     contract = new web3.eth.Contract(
         mfrmTokenABI,
@@ -3920,7 +3920,7 @@ function initPoolHomedata () {
     );
     let totalSupply = contract.methods.totalSupply()
         .call().then((totalSupply) => {
-            return (totalSupply / Math.pow(10, 18)).toFixedSpecial(18);
+            return (totalSupply);
         });
     // pending Mfrm Tokens
     contract = new web3.eth.Contract(
@@ -3929,7 +3929,7 @@ function initPoolHomedata () {
     );
     let pendingToken = contract.methods.pendingMfrm(0, ethaddress)
         .call().then((pendingMfrmToken) => {
-            return (pendingMfrmToken / Math.pow(10, 18)).toFixedSpecial(18);
+            return (pendingMfrmToken);
         });
     // get mfrm per block
     const tokenContract = new web3.eth.Contract(
@@ -3938,7 +3938,7 @@ function initPoolHomedata () {
     );
     let mfrmPerBlock = tokenContract.methods.MfrmPerBlock()
         .call().then((mfrmPerBlock) => {
-            return mfrmPerBlock / Math.pow(10, 18);
+            return mfrmPerBlock;
         });
     const promiseData = [accountBalance, totalSupply, pendingToken, mfrmPerBlock];
     return Promise.all(promiseData).then((resultantCount) => {
@@ -3974,7 +3974,7 @@ export function getBalance () {
     );
     contract.methods.balanceOf(ethaddress)
         .call().then((accountBalance) => {
-            console.log((accountBalance / Math.pow(10, 18)).toFixedSpecial(18));
+            console.log(accountBalance);
         });
 }
 
@@ -3986,7 +3986,7 @@ export async function getTotalSupply () {
     );
     let totalSupply = contract.methods.totalSupply()
         .call().then((totalSupply) => {
-            return (totalSupply / Math.pow(10, 18)).toFixedSpecial(18);
+            return (totalSupply);
 
         });
     return totalSupply;
@@ -4033,7 +4033,7 @@ export function mfrmPerBlock () {
     );
     contract.methods.MfrmPerBlock()
         .call().then((mfrmPerBlock) => {
-            console.log(mfrmPerBlock / Math.pow(10, 18));
+            console.log(mfrmPerBlock);
         });
 }
 
@@ -4047,7 +4047,7 @@ export async function getPairAllowance (pid) {
         ethaddress,
         contractAddressJSON.address[1].mfrmMasterChef)
         .call().then((totalAllowance) => {
-           return (totalAllowance / Math.pow(10, 18)).toFixedSpecial(18);
+           return totalAllowance;
         });
     return totalAllowance;
 }
@@ -4060,7 +4060,7 @@ export async function pendingMfrm (pid) {
     );
     let pendingMfrmToken = contract.methods.pendingMfrm(pid, ethaddress)
         .call().then((pendingMfrmToken) => {
-            return new BigNumber(pendingMfrmToken);
+            return pendingMfrmToken;
         });
     return pendingMfrmToken;
 }
@@ -4105,9 +4105,8 @@ export async function removeToPool (pid, amount) {
         mfrmMasterChefABI,
         contractAddressJSON.address[1].mfrmMasterChef
     );
-    let trueAmount = new BigNumber(amount);
     let removeToPoolData = contract.methods
-        .withdraw(pid, trueAmount)
+        .withdraw(pid, amount)
         .send({ from: ethaddress }, async function (error, transactionHash) {
             console.log(transactionHash);
             return transactionHash;
