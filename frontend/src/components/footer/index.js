@@ -7,11 +7,12 @@ export default function Footer() {
         <div className='footer'>
             <ul className='footerList'>
                 <li><NavLink to='/home'>Home</NavLink></li>
-                <li><NavLink to='stake'>Stake</NavLink></li>
-                <li><NavLink to='/about'>About</NavLink></li>
-                <li><NavLink to='/contactUs'>Contact</NavLink></li>
-                <li><NavLink to='/termsOfUse'>Terms of Use</NavLink></li>
-                <li><NavLink to='/privacyPolicy'>Privacy Policy</NavLink></li>
+                <li><NavLink to='stake'>Farm</NavLink></li>
+                <li><a href="https://medium.com/@Go_APEcoin/memefarm-io-introduces-nft-dao-996aadd6d805">About</a></li>
+                <li><a href="https://medium.com/@Go_APEcoin/memefarm-io-introduces-nft-dao-996aadd6d805">Github</a></li>
+                <li><a href="https://twitter.com/Go_MemeFarm">Twitter</a></li>
+                <li><a href="https://medium.com/@Go_APEcoin">Medium</a></li>
+                <li><a href="https://apecoin.dev/">Powered by APECoin</a></li>
             </ul>
             <p>© 2020 MEME FARM, All Rights Reserved.</p>
         </div>

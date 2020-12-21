@@ -21,7 +21,9 @@ class Harvest extends Component {
     poolAmount: 0,
     stakeBalance: 0,
     showLPTokenBalance: '0.000',
-    showPoolAmount: '0.000'
+    showPoolAmount: '0.000',
+    uniswapLink: 'https://app.uniswap.org/#/pool',
+    baseToken: null,
   }
   componentDidMount () {
     if (!this.props.boxInfo) {
@@ -36,6 +38,8 @@ class Harvest extends Component {
       this.setState({ pid: id })
     }
     this.getPairAllowance(id);
+    this.getUniswapLink(id);
+    this.getBaseToken(id);
   }
   // checks user first time user coming or not
   //checks if user has nonzero balance before moving to next step
@@ -66,7 +70,7 @@ class Harvest extends Component {
     utils.getLPTokenBalance(id).then(stakeBalance => {
       this.setState({
         stakeBalance: stakeBalance,
-        showLPTokenBalance: Number(stakeBalance / Math.pow(10,18)) === 0 ? '0.000' : Number(stakeBalance / Math.pow(10,18))
+        showLPTokenBalance: Number(stakeBalance / Math.pow(10,18)) === 0 ? '0.000' : Number(stakeBalance / Math.pow(10,18)).toFixed(3)
       })
     })
   }
@@ -143,6 +147,17 @@ class Harvest extends Component {
       this.props.pendingMfrmBalance(resp);
     })
   }
+  getUniswapLink = (id) => {
+    utils.getUniswapLink(id).then(resp => {
+      this.setState({ uniswapLink: resp });
+    })
+  }
+  getBaseToken = (id) => {
+    utils.getBaseToken(id).then(resp => {
+      this.setState({ baseToken: resp });
+    })
+  }
+
   render () {
     let harvestBtnClasses = ['harvectBoxButton']
     if (!Number(this.props.pendingMfrm)) {
@@ -156,10 +171,12 @@ class Harvest extends Component {
             onClick={this.unStakeHandler} >
             UNSTAKE
           </button>
-          <div className="harvectBoxButton harvectBoxButton2">
-            <img src={require("../../assets/images/plus.png")}
+          <button className="harvectBoxButton harvectBoxButton2"
+            onClick={this.StakeHandler} >
+            <img 
+              src={require("../../assets/images/plus.png")}
               alt="plus" />
-          </div>
+          </button>
         </Aux>
       }
       else {
@@ -168,11 +185,12 @@ class Harvest extends Component {
             onClick={this.stakeHandler}>
             STAKE
           </button>
-          <div className="harvectBoxButton harvectBoxButton2">
+          <button className="harvectBoxButton harvectBoxButton2"
+            onClick={this.StakeHandler} >
             <img
               src={require("../../assets/images/plus.png")}
               alt="plus" />
-          </div>
+          </button>
         </Aux>
       }
     }
@@ -193,24 +211,27 @@ class Harvest extends Component {
                 className="harvectLogo"
                 alt="harvectImage"
               />
-              <p className="harvectTitle">
-                Lorem ipsum <span className="harvectTitleSpan">dolor sit.</span>
-              </p>
+              <a 
+                href={this.state.uniswapLink}
+                className="harvectTitle">
+                ADD <span className="harvectTitleSpan">LIQUIDITY</span>
+              </a>
               <p className="harvectInfo">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                nonumy eirmod tempor invidunt ut.
+                Click above to exchange {this.state.baseToken} and ETH for {this.state.baseToken}/ETH UNI V2 LP tokens. 
+                <br></br>
+                APPROVE and then STAKE to add your LP tokens and begin farming!
                             </p>
               <div className="harvectBlock">
                 <div className="harvectBox">
                   <div className="harvectBoxLeft">
                     <div className="harvectBoxLeftLine">
-                      <p>ILLUSTRATION</p>
+                      <p>🚜</p>
                     </div>
                   </div>
                   <div className="harvectBoxRight">
                     <div>
                       <p className="harvectBoxRightCount">{this.props.pendingMfrm}</p>
-                      <p className="harvectBoxRightInfo">MEME earned</p>
+                      <p className="harvectBoxRightInfo">MFRM earned</p>
                     </div>
                     <button className={harvestBtnClasses.join(' ')}
                       disabled={!Number(this.props.pendingMfrm)}
@@ -220,14 +241,14 @@ class Harvest extends Component {
                 <div className="harvectBox harvectBlockRight">
                   <div className="harvectBoxLeft">
                     <div className="harvectBoxLeftLine">
-                      <p>ILLUSTRATION</p>
+                      <p>👨🏻‍🍳</p>
                     </div>
                   </div>
                   <div className="harvectBoxRight">
                     <div>
                       <p className="harvectBoxRightCount">{Number(this.state.poolAmount) ?
                         this.state.showPoolAmount : this.state.showLPTokenBalance}</p>
-                      <p className="harvectBoxRightInfo">MEME earned</p>
+                      <p className="harvectBoxRightInfo">Your LP Tokens</p>
                     </div>
                     <div className="harvectBoxButtonBox">
                       {showButton}

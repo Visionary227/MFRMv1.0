@@ -36,10 +36,9 @@ class Home extends Component {
             (res[0]/Math.pow(10,18)).toFixed(3),
             (res[1]/Math.pow(10,18)).toFixed(3),
             (res[2]/Math.pow(10,18)).toFixed(3),
-            (res[3]/Math.pow(10,18)).toFixed(3),
+            (res[3]*2/Math.pow(10,18)).toFixed(3), //corrects for mult
             res[4],
         ];
-        console.log("addressInfo registered");
         this.props.onStoreBoxInfo(true);
         this.props.onStoreMemeBalance(memeBalance);
         this.props.onStoreSupplyBalance(supplyBalance);
@@ -47,7 +46,6 @@ class Home extends Component {
         this.props.onStoreTotalRewards(totalRewards);
         this.props.onStoreAddressInfo(addressInfo);
         this.setState((state, props) => ({ addressData: addressInfo.address}));
-        console.log("this.state.addressData= ", this.state.addressData)  
     }
     });
   };

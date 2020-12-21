@@ -22,16 +22,16 @@ export default function Header (props) {
                 className="headerIcons"
                 alt="stake_icon"
               />
-              <p className="headerLeftInfo">STAKE</p>
+              <p className="headerLeftInfo">FARM</p>
             </NavLink>
-            <NavLink to="/about" className="headerLeftBlock">
+            <a href="https://medium.com/@Go_APEcoin/memefarm-io-introduces-nft-dao-996aadd6d805" className="headerLeftBlock">
               <img
                 src={require("../../assets/images/header/icon3_1.png")}
                 className="headerIcons"
                 alt="about_icon"
               />
               <p className="headerLeftInfo">ABOUT</p>
-            </NavLink>
+            </a>
           </div>
           <img
             src={require("../../assets/images/header/logo.png")}
@@ -52,12 +52,12 @@ export default function Header (props) {
             <div className="headerForHomeBox">
               <div className="headerForHomeBoxBlock">
                 <h2>
-                  Lorem ipsum dolor sit amet, consetetur{" "}
-                  <span style={{ color: "#F5BC49" }}>sadipscing elitr</span> ,
-                                         sed.
+                  MemeFarm is{" "}
+                  <span style={{ color: "#F5BC49" }}>live!</span>
                                 </h2>
+               <h2>Earn yield. Farm NFTs.</h2>
                 <div className="headerLine"></div>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</p>
+                <p>We connect collectors with creators through yield farming, NFTs and community governance.</p>
               </div>
               <img
                 src={require("../../assets/images/header/headerBg.png")}
