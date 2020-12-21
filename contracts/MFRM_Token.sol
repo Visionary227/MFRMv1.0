@@ -1,10 +1,9 @@
-// SPDX-License-Identifier: MIT
 
+// SPDX-License-Identifier: MIT
 pragma solidity >=0.6.0 <0.8.0;
 
 
-
-
+//https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/math/SafeMathUpgradeable.sol
 /**
  * @dev Wrappers over Solidity's arithmetic operations with added overflow
  * checks.
@@ -18,7 +17,7 @@ pragma solidity >=0.6.0 <0.8.0;
  * Using this library instead of the unchecked operations eliminates an entire
  * class of bugs, so it's recommended to use it always.
  */
-library SafeMath {
+library SafeMathUpgradeable {
     /**
      * @dev Returns the addition of two unsigned integers, reverting on
      * overflow.
@@ -161,10 +160,15 @@ library SafeMath {
     }
 }
 
+
+
+
+
+//https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/token/ERC20/IERC20Upgradeable.sol
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
  */
-interface IERC20 {
+interface IERC20Upgradeable {
     /**
      * @dev Returns the amount of tokens in existence.
      */
@@ -238,6 +242,70 @@ interface IERC20 {
 
 
 
+//https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/proxy/Initializable.sol
+/**
+ * @dev This is a base contract to aid in writing upgradeable contracts, or any kind of contract that will be deployed
+ * behind a proxy. Since a proxied contract can't have a constructor, it's common to move constructor logic to an
+ * external initializer function, usually called `initialize`. It then becomes necessary to protect this initializer
+ * function so it can only be called once. The {initializer} modifier provided by this contract will have this effect.
+ * 
+ * TIP: To avoid leaving the proxy in an uninitialized state, the initializer function should be called as early as
+ * possible by providing the encoded function call as the `_data` argument to {UpgradeableProxy-constructor}.
+ * 
+ * CAUTION: When used with inheritance, manual care must be taken to not invoke a parent initializer twice, or to ensure
+ * that all initializers are idempotent. This is not verified automatically as constructors are by Solidity.
+ */
+abstract contract Initializable {
+
+    /**
+     * @dev Indicates that the contract has been initialized.
+     */
+    bool private _initialized;
+
+    /**
+     * @dev Indicates that the contract is in the process of being initialized.
+     */
+    bool private _initializing;
+
+    /**
+     * @dev Modifier to protect an initializer function from being invoked twice.
+     */
+    modifier initializer() {
+        require(_initializing || _isConstructor() || !_initialized, "Initializable: contract is already initialized");
+
+        bool isTopLevelCall = !_initializing;
+        if (isTopLevelCall) {
+            _initializing = true;
+            _initialized = true;
+        }
+
+        _;
+
+        if (isTopLevelCall) {
+            _initializing = false;
+        }
+    }
+
+    /// @dev Returns true if and only if the function is running in the constructor
+    function _isConstructor() private view returns (bool) {
+        // extcodesize checks the size of the code stored in an address, and
+        // address returns the current address. Since the code is still not
+        // deployed when running a constructor, any checks on its code size will
+        // yield zero, making it an effective way to detect if a contract is
+        // under construction or not.
+        address self = address(this);
+        uint256 cs;
+        // solhint-disable-next-line no-inline-assembly
+        assembly { cs := extcodesize(self) }
+        return cs == 0;
+    }
+}
+
+
+
+
+
+//https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/GSN/ContextUpgradeable.sol
 /*
  * @dev Provides information about the current execution context, including the
  * sender of the transaction and its data. While these are generally available
@@ -248,7 +316,13 @@ interface IERC20 {
  *
  * This contract is only required for intermediate, library-like contracts.
  */
-abstract contract Context {
+abstract contract ContextUpgradeable is Initializable {
+    function __Context_init() internal initializer {
+        __Context_init_unchained();
+    }
+
+    function __Context_init_unchained() internal initializer {
+    }
     function _msgSender() internal view virtual returns (address payable) {
         return msg.sender;
     }
@@ -257,76 +331,13 @@ abstract contract Context {
         this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
         return msg.data;
     }
+    uint256[50] private __gap;
 }
 
 
 
-/**
- * @dev Contract module which provides a basic access control mechanism, where
- * there is an account (an owner) that can be granted exclusive access to
- * specific functions.
- *
- * By default, the owner account will be the one that deploys the contract. This
- * can later be changed with {transferOwnership}.
- *
- * This module is used through inheritance. It will make available the modifier
- * `onlyOwner`, which can be applied to your functions to restrict their use to
- * the owner.
- */
-abstract contract Ownable is Context {
-    address private _owner;
 
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-
-    /**
-     * @dev Initializes the contract setting the deployer as the initial owner.
-     */
-    constructor () internal {
-        address msgSender = _msgSender();
-        _owner = msgSender;
-        emit OwnershipTransferred(address(0), msgSender);
-    }
-
-    /**
-     * @dev Returns the address of the current owner.
-     */
-    function owner() public view returns (address) {
-        return _owner;
-    }
-
-    /**
-     * @dev Throws if called by any account other than the owner.
-     */
-    modifier onlyOwner() {
-        require(_owner == _msgSender(), "Ownable: caller is not the owner");
-        _;
-    }
-
-    /**
-     * @dev Leaves the contract without owner. It will not be possible to call
-     * `onlyOwner` functions anymore. Can only be called by the current owner.
-     *
-     * NOTE: Renouncing ownership will leave the contract without an owner,
-     * thereby removing any functionality that is only available to the owner.
-     */
-    function renounceOwnership() public virtual onlyOwner {
-        emit OwnershipTransferred(_owner, address(0));
-        _owner = address(0);
-    }
-
-    /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
-     * Can only be called by the current owner.
-     */
-    function transferOwnership(address newOwner) public virtual onlyOwner {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
-        emit OwnershipTransferred(_owner, newOwner);
-        _owner = newOwner;
-    }
-}
-
-
-
+//https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/token/ERC20/ERC20Upgradeable.sol
 /**
  * @dev Implementation of the {IERC20} interface.
  *
@@ -351,8 +362,8 @@ abstract contract Ownable is Context {
  * functions have been added to mitigate the well-known issues around setting
  * allowances. See {IERC20-approve}.
  */
-contract ERC20 is Context, IERC20 {
-    using SafeMath for uint256;
+contract ERC20Upgradeable is Initializable, ContextUpgradeable, IERC20Upgradeable {
+    using SafeMathUpgradeable for uint256;
 
     mapping (address => uint256) private _balances;
 
@@ -373,7 +384,12 @@ contract ERC20 is Context, IERC20 {
      * All three of these values are immutable: they can only be set once during
      * construction.
      */
-    constructor (string memory name_, string memory symbol_) public {
+    function __ERC20_init(string memory name_, string memory symbol_) internal initializer {
+        __Context_init_unchained();
+        __ERC20_init_unchained(name_, symbol_);
+    }
+
+    function __ERC20_init_unchained(string memory name_, string memory symbol_) internal initializer {
         _name = name_;
         _symbol = symbol_;
         _decimals = 18;
@@ -624,18 +640,113 @@ contract ERC20 is Context, IERC20 {
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
+    uint256[44] private __gap;
 }
 
 
-contract MFRM_Simple is ERC20, Ownable {
-    constructor(string memory name_, string memory symbol_) public 
-    ERC20(name_, symbol_)
-    {
-        //string memory name_ = "MasterFarm";
-        //string memory symbol_ = "MFRM";
-        
+
+
+//https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/access/OwnableUpgradeable.sol
+/**
+ * @dev Contract module which provides a basic access control mechanism, where
+ * there is an account (an owner) that can be granted exclusive access to
+ * specific functions.
+ *
+ * By default, the owner account will be the one that deploys the contract. This
+ * can later be changed with {transferOwnership}.
+ *
+ * This module is used through inheritance. It will make available the modifier
+ * `onlyOwner`, which can be applied to your functions to restrict their use to
+ * the owner.
+ */
+abstract contract OwnableUpgradeable is Initializable, ContextUpgradeable {
+    address private _owner;
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    function __Ownable_init() internal initializer {
+        __Context_init_unchained();
+        __Ownable_init_unchained();
     }
-    function rewards(address _to, uint256 _amount) public onlyOwner() {
+
+    function __Ownable_init_unchained() internal initializer {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    /**
+     * @dev Leaves the contract without owner. It will not be possible to call
+     * `onlyOwner` functions anymore. Can only be called by the current owner.
+     *
+     * NOTE: Renouncing ownership will leave the contract without an owner,
+     * thereby removing any functionality that is only available to the owner.
+     */
+    function renounceOwnership() public virtual onlyOwner {
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Can only be called by the current owner.
+     */
+    function transferOwnership(address newOwner) public virtual onlyOwner {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+    uint256[49] private __gap;
+}
+
+
+
+
+
+
+
+
+// MFRM Token is the MemeFarm goverance token which is issued by the MemeFarm
+// contract as a reward for staking LP tokens
+contract MemeFarmToken is ERC20Upgradeable, OwnableUpgradeable {
+    function initialize() initializer public {
+        __ERC20_init("MemeFarm", "MFRM");
+        __Ownable_init();
+    }
+
+    /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (memefarm).
+    function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

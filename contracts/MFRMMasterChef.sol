@@ -1090,7 +1090,7 @@ contract ERC20 is Context, IERC20 {
 // MFRMToken with Governance.
 contract MfrmToken is ERC20("MEME Farm Token", "MFRM"), Ownable {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
-    function rewards(address _to, uint256 _amount) public onlyOwner {
+    function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
     }
 }
@@ -1218,7 +1218,7 @@ contract MasterChef is Ownable {
     }
 
     // View function to see pending Mfrms on frontend.
-    function pendingMfrm(uint256 _pid, address _user) external view returns (uint256) {
+    function pendingMfrm(uint256 _pid, address _user) public view returns (uint256) {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][_user];
         uint256 accMfrmPerShare = pool.accMfrmPerShare;
@@ -1234,6 +1234,15 @@ contract MasterChef is Ownable {
             accMfrmPerShare = accMfrmPerShare.add(MfrmReward.mul(1e12).div(lpSupply));
         }
         return user.amount.mul(accMfrmPerShare).div(1e12).sub(user.rewardDebt);
+    }
+
+    function totalPending(address _user) external view returns (uint256) {
+        uint256 total = 0;
+        uint256 length = poolInfo.length;
+        for (uint256 pid = 0; pid < length; ++pid) {
+            total = total + pendingMfrm(pid, _user);
+        }
+        return(total);
     }
 
     // Update reward vairables for all pools. Be careful of gas spending!
@@ -1262,9 +1271,9 @@ contract MasterChef is Ownable {
         if (PoolEndBlock > daoStartBlock){
             uint256 daoReward = MfrmReward.mul(daoPercent).div(100);
             MfrmReward = MfrmReward.sub(daoReward);
-            Mfrm.rewards(daoAddress, daoReward);
+            Mfrm.mint(daoAddress, daoReward);
         }
-        Mfrm.rewards(address(this), MfrmReward);
+        Mfrm.mint(address(this), MfrmReward);
         pool.accMfrmPerShare = pool.accMfrmPerShare.add(MfrmReward.mul(1e12).div(lpSupply));
         pool.lastRewardBlock = PoolEndBlock;
     }
@@ -1322,10 +1331,14 @@ contract MasterChef is Ownable {
         }
     }
 
-    function setupDAO(address _daoAddress, uint256 _daoPercent) external onlyOwner {
+    function setupDAO(address _daoAddress, uint256 _daoPercent, uint256 _daoStartBlock) external onlyOwner {
         require(_daoPercent <= 50, "setupDAO: _daoPercent input too high");
+        require(_daoStartBlock > block.number, "stepDAO: daoStartBlock must be in future");
+        massUpdatePools();
         daoAddress = _daoAddress;
         daoPercent = _daoPercent;
+        daoStartBlock = _daoStartBlock;
     }
+
 }
 

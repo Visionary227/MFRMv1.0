@@ -3875,14 +3875,14 @@ const annualreward = annualblock * perblock;
 
 const contractAddress =
     '{ "address":[' +
-    '{"mfrmToken":"0x916d83c3ae414f1c0550e30ff94e8204cace2efb"},' +
-    '{"mfrmMasterChef":"0x4d4183708f0faC88D22dd304e1197E5899556Fa7"}]}';
+    '{"mfrmToken":"0xae0e2128f201e069eb272fd16670106a07a4c212"},' +
+    '{"mfrmMasterChef":"0xa8F1B569B0817e0d53a07e7A7DCc0Aee9486c6e2"}]}';
 export const contractAddressJSON = JSON.parse(contractAddress);
 
 const pairAddress =
     '{ "address":[' +
-    '{  "pid":"0", "pairAddress":"0x62378c443d221593fb8e45175797bbb6a0d0b0c9", "pair":"COOK-ETH UNI-V2", "apy": "127" },' +
-    '{  "pid":"1", "pairAddress":"0x5f1c20c975a2978a799d66f8590d26acda703715", "pair":"T2-ETH UNI-V2", "apy": "127" },' +
+    '{  "pid":"0", "pairAddress":"0xf605025e3c4232dc9a916499654bf4051416e407", "pair":"MFRM-ETH UNI-V2", "apy": "127" },' +
+    '{  "pid":"1", "pairAddress":"0x5f1c20c975a2978a799d66f8590d26acda703715", "pair":"APE-ETH UNI-V2", "apy": "127" },' +
     '{  "pid":"2", "pairAddress":"0x29F82984F6081478112dc10347dCe433f386F769", "pair":"TEND-ETH UNI-V2", "apy": "127" },' +
     '{  "pid":"3", "pairAddress":"0x1FE4a809cB6F2d495b875A07565Ccc466586a14b", "pair":"NYAN-ETH UNI-V2", "apy": "127" },' +
     '{  "pid":"4", "pairAddress":"0xDdeB29d1E9D8690211a1ab4F229a57aFb1c8498D", "pair":"MEME-ETH UNI-V2", "apy": "127" },' +
