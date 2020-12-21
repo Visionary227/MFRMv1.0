@@ -99,7 +99,7 @@ export default function Header (props) {
                               <p>LOCKED</p>
                             </div>
                             <p className="toUnlockItPleaseAddYouWallet">
-                              To unlock it please add you wallet
+                              To unlock please add your wallet
                           </p>
                             <div className="headerLockBlockBtn"
                               onClick={() => props.openPopUp()}
@@ -154,7 +154,7 @@ export default function Header (props) {
                               <p>LOCKED</p>
                             </div>
                             <p className="toUnlockItPleaseAddYouWallet">
-                              To unlock it please add you wallet
+                              To unlock please add your wallet
                           </p>
                             <div
                               className="headerLockBlockBtn"

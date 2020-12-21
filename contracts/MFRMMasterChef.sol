@@ -1333,7 +1333,7 @@ contract MasterChef is Ownable {
 
     function setupDAO(address _daoAddress, uint256 _daoPercent, uint256 _daoStartBlock) external onlyOwner {
         require(_daoPercent <= 50, "setupDAO: _daoPercent input too high");
-        require(_daoStartBlock > block.number, "stepDAO: daoStartBlock must be in future");
+        require(_daoStartBlock > block.number, "setupDAO: _daoStartBlock must be in future");
         massUpdatePools();
         daoAddress = _daoAddress;
         daoPercent = _daoPercent;

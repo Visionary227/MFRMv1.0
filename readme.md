@@ -1,6 +1,4 @@
-# Archived Memefarm Code
-This repo contains a copy of all the various code that's been released by
-MEMEFARM.io or found in various audits.
+# MemFarm
+A new way for makers and artists to get paid.
 
-This includes both a non-functional React frontend as well as smart contract
-implementation.
+MemeFarm is an exciting protocol that combines DeFi yield-farming and rare non-fungible tokens (NFTs).
