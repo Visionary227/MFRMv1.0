@@ -54,7 +54,7 @@
     color: #FFFFFF;
     text-transform: uppercase; 
     font-family: 'SegoeBold';
-    font-size: 18px;
+    font-size: 100px;
 }
 .harvectBoxRight{
     padding: 20px;
@@ -131,7 +131,7 @@
         width: 140px; 
     }
     .harvectBoxLeftLine p{
-        font-size: 16px;
+        font-size: 100px;
     }
     .harvectBoxRight{
         padding: 18px;
@@ -184,7 +184,7 @@
         width: 120px; 
     }
     .harvectBoxLeftLine p{
-        font-size: 14px;
+        font-size: 100px;
     }
     .harvectBoxRight{
         padding: 12px;
@@ -239,7 +239,7 @@
         width: 100px; 
     }
     .harvectBoxLeftLine p{
-        font-size: 12px;
+        font-size: 100px;
     }
     .harvectBoxRight{
         padding: 10px;

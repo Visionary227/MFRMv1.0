@@ -19,7 +19,7 @@ export default function HeaderForHome () {
                         <div className="headerForHomePosition">
                             <div className='headerForHomePositionBlock'>
                                 <div className='headerForHomePositionBlockTop'>
-                                    <p className='headerForHomePositionBlockTopTitle'>YOUR MEME <span style={{ color: "#323234" }}>BALANCE</span> </p>
+                                    <p className='headerForHomePositionBlockTopTitle'>YOUR FMRM <span style={{ color: "#323234" }}>BALANCE</span> </p>
                                     <div className='headerPriceBox'>
                                         <p className='headerPriceBoxInfo'>$0.000</p>
                                     </div>

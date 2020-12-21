@@ -6,11 +6,11 @@ export default function StakeBox (props) {
         <div className='stakeBox'>
             <div className='stakeBoxLeft'>
                 <div className='stakeBoxLeftBlock'>
-                    <p>ILLUSTRATION</p>
+                    <p>{props.icon}</p>
                 </div>
             </div>
             <div className='stakeBoxRight'>
-                <p className='stakeBoxRightTitle'>Lorem ipsum dolor sit.</p>
+                <p className='stakeBoxRightTitle'>{props.pool}</p>
                 <p className='stakeBoxRightText'>{props.title}</p>
                 <div className='stakeBoxRightInput'>
                     <p>APY</p>

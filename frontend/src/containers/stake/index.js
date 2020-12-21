@@ -38,8 +38,9 @@ class Stake extends Component {
     }
 
     getAddressData = () => {
-        let addressInfo = utils.getAddressInfo();
-        this.setState((state, props) => ({ addressData: addressInfo.address })); 
+        utils.getAddressInfo().then(resp => {
+            this.setState((state, props) => ({ addressData: resp.address }));
+        });
     };
     openPopupHandler = () => {
         this.setState({ showPopUp: !this.state.showPopUp });
@@ -76,8 +77,10 @@ class Stake extends Component {
                         <StakeBox
                             key={item.pid}
                             select={() => this.select(item.pid)}
+                            pool={item.pool}
                             title={item.pair}
                             apy={item.apy}
+                            icon={item.icon}
                         />
                     ))}
                 </div>
@@ -117,7 +120,6 @@ class Stake extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("mapStateToProps:", state.balanceInfo.addressData.address);
     return {
         boxInfo: state.balanceInfo.boxInfo,
         pendingMfrm: state.balanceInfo.pendingMfrm,
